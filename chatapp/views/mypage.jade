@@ -1,0 +1,17 @@
+﻿extends layout
+
+block content
+  h1= title
+
+  label(for='name') 名前
+  input(type='text',id='name')
+  label(for='text') 内容
+  input(type='text',id='text')
+  button#send 送信
+
+  #messages
+  .list
+
+  script(src='javascripts/jquery-2.0.0.min.js')
+  script(src='/socket.io/socket.io.js')
+  script(src='javascripts/chat.js')

@@ -1,0 +1,71 @@
+﻿extends layout
+
+block content
+  h1= title
+
+  div#chatRogo
+   a(href='/')
+    img(src='images/rogo.png', alt='サンプル')
+
+
+  //label(for='name') 名前
+  //input(type='text',id='name')
+  //button#send2 送信
+  
+  div#textform
+   label(for='text') 内容
+   input(type='text',id='text',size="50", maxlength="100",placeholder="つぶやきを入力してください")
+   button#send 送信
+
+  div#hukidasiList 
+
+
+
+  div#chatAvatar
+   div#chatAvatarMe
+    //img(src='images/red.jpg', alt='サンプル')
+   div#chatAvatarOther
+    //img(src='images/blue.jpg', alt='サンプル')
+    //&nbsp;&nbsp;
+    //img(src='images/green.jpg', alt='サンプル')
+
+  div#chatName
+  
+  div#hikousen
+   img(src='images/hikousen.png', alt='サンプル')
+
+
+
+  #messages
+  .list
+  //.hukidasi abc
+  //.kome
+  
+  //button#random ああ
+  
+  div#canvasbodar
+  canvas(width='500', height='400')
+  ul
+   li(style='background-color:#000')
+   li(style='background-color:#f00')
+   li(style='background-color:#0f0')
+   li(style='background-color:#00f')
+   li(style='background-color:#ff0')
+   li(style='background-color:#fff')
+  #button2
+   input#save2(type='button', value='保存')
+   input#clear2(type='button', value='消去')
+
+  input#spuit(type='radio', name='brush')
+  
+  
+  #nowcolor
+  
+  
+  div#backimage
+   img(src='images/backimage.png', alt='サンプル',id='ava0')
+
+
+  script(src='javascripts/jquery-2.0.0.min.js')
+  script(src='/socket.io/socket.io.js')
+  script(src='javascripts/chat.js')

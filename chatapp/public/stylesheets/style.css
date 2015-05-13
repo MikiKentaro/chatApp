@@ -1,0 +1,302 @@
+body {
+  padding: 50px;
+  
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+   background-color:#6495ED;
+
+}
+
+#maintop{
+  width:80%;
+  margin: 0 auto;
+  background-color:#ffffff;
+text-align: center;
+
+}
+
+a {
+  color: #00B7FF;
+}
+
+.popup{
+background-color:#99ff99;
+z-index:3;
+position:absolute;
+    top:29px;
+    left:30px;
+
+
+
+}
+
+.list{
+position:absolute;
+
+bottom:50px;
+    right:30px;
+text-align: right;
+}
+
+.hukidasi{
+position:relative;
+
+
+}
+.chattext{
+font-size:18px;
+  padding: 3px 8px;
+
+background-color: #aaffaa;  
+border-radius: 10px;      
+
+
+
+}
+.chatfrom{
+
+
+}
+#textform{
+position:absolute;
+
+bottom:10px;
+    right:30px;
+text-align: right;
+font-size:20px;
+
+z-index:5;
+
+
+}
+#form{
+font-size:30px;
+
+
+}
+
+
+#text{
+height: 24px;
+font-size:20px;
+
+}
+#name{
+height: 24px;
+font-size:20px;
+
+}
+#chatAvatar{
+z-index:5;
+font-size: 20px;
+
+}
+
+#chatAvatarMe{
+position:absolute;
+bottom:30px;
+left:30px;
+}
+
+#chatAvatarMe img{
+width:100px;
+
+
+}
+
+#chatAvatarOther{
+position:absolute;
+bottom:30px;
+left:140px;
+}
+
+#chatAvatarOther img{
+width:80px;
+
+}
+
+.roomname{
+
+float:left;
+font-size:24px;
+width:33%;
+text-align: center;
+ padding: 4px 0px;
+}
+
+
+.roomlist{
+  margin: 0 auto;
+
+
+}
+
+#plusChat{
+clear:both;
+
+
+}
+.avatarOtherOne{
+float:left;
+
+
+}
+
+floatEnd{
+clear:both;
+
+}
+
+#hukidasiList{
+
+position:absolute;
+left:10px;
+bottom:250px;
+
+}
+.hukiMesse{
+
+
+font-size:15px;
+  padding: 3px 8px;
+
+background-color: #aaffaa;  
+border-radius: 7px;      
+
+
+}
+
+#chatTable{
+
+position:relative;
+
+right:10px;
+text-align: right;
+
+}
+
+#chatName{
+font-size:25px;
+position:absolute;
+    top:50px;
+    left: 600px;
+z-index:4;
+
+
+}
+
+#hikousen img{
+position:absolute;
+    top:-20px;
+    left: 540px;
+width:200px;
+z-index:3;
+
+}
+#topAvatar img{
+
+width:100px;
+
+
+
+}
+
+#backimage img{
+z-index:-100;
+position:absolute;
+    left:-20px;
+    bottom: -20px;
+	width:110%;
+
+
+
+}
+#topRogo img{
+
+width:300px;
+
+}
+#chatRogo img{
+
+width:250px;
+position:absolute;
+    top:0px;
+    left: 0px;
+}
+
+
+
+
+
+#canvasbodar{
+background-color:#ffffff;
+z-index:-1;
+ 
+  margin: 0 auto;
+
+position:absolute;
+    top: 125px;
+    left: 20%;
+    border: 5px solid #ccc;
+width:500px;
+height:400px;
+
+
+}
+
+canvas {
+  z-index=10;
+  margin: 0 auto;
+
+position:absolute;
+    top: 125px;
+    left: 20%;
+   
+}
+#button2 {
+    position: relative;
+    top: -55px;
+    left: 345px;
+}
+#save2 {
+    font-size: 120%;
+    width: 80px;
+    height: 50px;
+}
+#clear2 {
+    font-size: 120%;
+    width: 80px;
+    height: 50px;
+}
+li {
+    cursor:pointer;
+    cursor:hand;
+    display:inline-block;
+    border: 1px solid #000;
+    width: 50px;
+    height: 50px;
+}
+
+#nowcolor{
+
+width: 100px;
+height: 50px;
+border: 2px solid #000;
+background-color:#000000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

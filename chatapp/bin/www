@@ -1,0 +1,265 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('chatapp:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+
+
+var userlist = new Array();
+//var userlistChat = new Array();
+
+
+
+
+var io = require('socket.io').listen(server);
+
+
+
+
+
+io.sockets.on('connection', function(socket) {
+  //接続のidを確認
+  console.log('connected', socket.id);
+      io.emit('start', "start");
+	  
+  socket.on('visitChat', function(visitChat) {
+    console.log('chatnum: ' + visitChat.name);
+socket.join(visitChat.chatname);
+io.sockets.in(visitChat.chatname).emit('visitChat', visitChat);
+
+	userlist[socket.id] = {name:visitChat.name,chat:visitChat.chatname,avatar:visitChat.avatar}; //add user info
+//userlistChat[socket.id]=visitChat.chatname;
+
+
+	 
+});
+
+
+socket.on('abc', function(abc) {
+   
+//io.sockets.in(abc.chatname).emit('abc', abc);
+CHAT=abc.chatname;
+NAME=abc.name;
+console.log("abcName"+NAME);
+io.sockets.in(socket.id).emit("rewriteMember", getMember(CHAT,NAME));
+
+});
+
+
+
+
+  // chatというイベントを受信したとき、送られた内容をすべてのクライアントに送信する
+  socket.on('chat', function(chat) {
+    io.emit('chat', chat);
+	
+	
+	
+  });
+
+ // chatというイベントを受信したとき、送られた内容をすべてのクライアントに送信する
+  socket.on('startadd', function() {
+    //console.log('message : ' + chat.message);
+    //io.emit('chat', chat);
+	var socket_id = socket.id;
+	console.log('message : ' + socket_id);
+
+	io.to(socket_id).emit('event_name',socket_id);
+
+
+	
+  });
+
+
+
+
+
+// クライアントからメッセージ受信
+    socket.on('clear send', function () {
+ 
+        // 自分以外の全員に送る
+        socket.broadcast.emit('clear user');
+    });
+   // クライアントからメッセージ受信
+    socket.on('server send', function (msg) {
+ 
+        // 自分以外の全員に送る
+        socket.broadcast.emit('send user', msg);
+    });
+
+
+
+
+
+
+
+
+
+
+  // 接続が切断したとき
+  socket.on('disconnect', function() {
+    console.log(socket.id);
+	
+	
+    
+	io.sockets.emit('user disconnected');
+	
+	
+	 if(!(typeof userlist[socket.id] === "undefined")) {
+
+            console.log('logout: ' + userlist[socket.id].name);
+			            console.log('logout: ' + userlist[socket.id].chat);
+
+            //console.log('logout: ' + userlistChat[socket.id]);
+
+//io.sockets.emit('message', 'logout: ' + userlist[socket.id]);
+var delMemChat=userlist[socket.id].chat;
+	var delMemName=userlist[socket.id].name;
+	
+	io.emit('delMemName',{ name:delMemName,chat:delMemChat});
+	
+	//$.post('/data/chat', {delRoomName:delMemChat ,delMemName: delMemName}, function(res) {
+
+
+//});	
+	
+	
+//io.sockets.in(userlistChat[socket.id]).emit('delMemName',"del",{ name:delMemName,chat:delMemChat});
+
+
+
+
+
+
+
+            delete userlist[socket.id]; //delete user info
+//delete userlistChat[socket.id];
+
+        }
+   // io.emit('fin', "fin");
+
+	
+
+	
+	
+	
+	
+	
+	
+  });
+  
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+});
+
+
+
+function getMember(CHAT,NAME) {
+	var result = "";
+
+	for (var prop in userlist) {
+	
+	if(userlist[prop].chat==CHAT&&userlist[prop].name!=NAME){
+		// 最後に", "がつくけど無視
+		result += '<div class="avatarOtherOne"><div id="'+userlist[prop].name+'"><div>'+userlist[prop].name+'</div><img src="images/avatar'+userlist[prop].avatar+'.png" alt="サンプル"></div></div>'
+	}
+	}
+//	console.log("result : " + result);
+	return result;
+};
+

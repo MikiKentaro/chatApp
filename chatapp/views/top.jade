@@ -1,0 +1,50 @@
+﻿extends layout
+
+block content
+  div#maintop
+   
+   
+   div#topRogo
+    img(src='images/rogo.png', alt='サンプル')
+
+   div#start アバターを選択してください
+   
+   div#topAvatar
+    img(src='images/red.jpg', alt='サンプル',id='ava0')
+    img(src='images/avatar1.png', alt='サンプル',id='ava1')
+    img(src='images/avatar2.png', alt='サンプル',id='ava2')
+   div
+    <input type="radio" name="avatar" value="avater0" checked id="radio01" style="width:20px;height:20px" />
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <input type="radio" name="avatar" value="avater1" checked id="radio01" style="width:20px;height:20px" />
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <input type="radio" name="avatar" value="avater2" checked id="radio01" style="width:20px;height:20px" />
+
+
+   
+   label(for='name') 名前
+   input(type='text',size="25",id='name',placeholder="名前を入力してください")
+   //button#send(type='button') 送信
+   //button#send(type='button', onclick="location.href='/mypage'") 送信
+
+   
+   div
+   br
+   
+   div#topMesse どこのチャットにするか選択してください
+    button#serch(type='button') 検索
+   #messages
+   .roomlist
+   
+   div#plusChat 
+    button#plusChatButton(type='button') 新しいチャットを作成する	
+   
+   div 
+    
+
+  script(src='javascripts/jquery-2.0.0.min.js')
+  script(src='javascripts/top.js')
