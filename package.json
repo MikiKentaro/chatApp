@@ -17,5 +17,7 @@
   "devDependencies": {
     "mongoose": "^4.0.1",
     "socket.io": "^1.3.5"
+  }"engines": {
+    "node": "0.10.29"
   }
 }
