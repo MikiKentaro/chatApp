@@ -1,1 +1,1 @@
-web: npm satrt
+web:npm satrt
