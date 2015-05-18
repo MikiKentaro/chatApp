@@ -1,1 +1,1 @@
-web: npm satrt
+web: node web.js
