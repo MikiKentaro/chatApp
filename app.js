@@ -100,7 +100,6 @@ app.use('/mypage', mypage);
 app.use('/chat', chat);
 
 
-
 //var URL;
 //var abc;
 //abc="aabc";
@@ -116,12 +115,12 @@ app.get('/data/chat', function(req, res) {
 //  });
 
 
-  //Chat.find(null,{},{sort:{createdDate: 1}}, function(err, chats){
+  Chat.find(null,{},{sort:{createdDate: 1}}, function(err, chats){
 
-    res.send(Chat);
+    res.send(chats);
 
 	
-  //});
+  });
   
   var today=new Date();
   today.setDate(today.getDate() - 1);
