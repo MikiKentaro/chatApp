@@ -222,7 +222,7 @@ function postList() {
     // /todoにPOSTアクセスする
     $.post('/data/chat', {chatText: chattext,senderName:sendername,chatroom:chatroom}, function(res) {
 	
-        console.log(res);
+        //console.log(res);
         //再度表示する
        
     });
