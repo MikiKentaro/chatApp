@@ -14,6 +14,9 @@ text-align: center;
 
 }
 
+
+
+
 a {
   color: #00B7FF;
 }
@@ -299,4 +302,50 @@ background-color:#000000;
 
 
 
+#maintop_m{
+  width:100%;
+  margin: 0 auto;
+  background-color:#ffffff;
+text-align: center;
+  font: 35px "Lucida Grande", Helvetica, Arial, sans-serif;
 
+}
+#topAvatar_m{
+width:100%;
+
+}
+
+.roomname_m{
+
+float:left;
+font-size:40px;
+width:50%;
+height:60px;
+text-align: center;
+ padding: 4px 0px;
+}
+#name_m{
+height: 55px;
+font-size:50px;
+
+}
+#serch_m{
+height: 35px;
+font-size:30px;
+
+
+}
+
+#plusChatButton_m{
+height: 35px;
+font-size:30px;
+
+}
+
+
+
+#topRogo_m img{
+
+width:500px;
+
+}
