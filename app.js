@@ -17,7 +17,7 @@ var app = express();
 
 // mongooseを用いてMongoDBに接続する
 var mongoose = require('mongoose');
-
+/*
 module.exports.ready = function(db_name, callback){
   if ( process.env.MONGOLAB_URI ){
     // herokuの場合の処理
@@ -32,9 +32,10 @@ module.exports.ready = function(db_name, callback){
     });
   }
 };
+*/
+var MONGO_URL = process.env.MONGOLAB_URI || 'mongodb://localhost/chatapp';
 
-
-
+var db = mongoose.connect(MONGO_URL);
 //mongoose.connect('mongodb://localhost/chatapp');
 
 /* （略） */
