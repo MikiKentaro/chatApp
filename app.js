@@ -33,27 +33,8 @@ module.exports.ready = function(db_name, callback){
   }
 };
 
-var mongo_builder = require('./lib/mongo_builder');
-var chat_log = require('./lib/chat_log');
 
-mongo_builder.ready(db_name, function(db){
-  chat_log.set_db(db);
-});
 
-var db;
-var table_name = 'chat_log';
-
-// db を受け取ってローカルに保持
-module.exports.set_db = function(current_db){
-  db = current_db;
-};
-
-// チャットメッセージ保存処理
-module.exports.add = function(data){
-  db.collection(table_name, function(err, collection) {
-    collection.save( data, function(){} );
-  });
-};
 //mongoose.connect('mongodb://localhost/chatapp');
 
 /* （略） */
