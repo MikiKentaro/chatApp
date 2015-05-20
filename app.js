@@ -32,7 +32,7 @@ module.exports.ready = function(db_name, callback){
   }
 };
 
-//mongoose.connect('mongodb://localhost/chatapp');
+mongoose.connect('mongodb://localhost/chatapp');
 
 /* （略） */
 
