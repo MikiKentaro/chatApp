@@ -106,7 +106,7 @@ app.use('/chat', chat);
 
 // /todoにGETアクセスしたとき、ToDo一覧を取得するAPI
 app.get('/data/chat', function(req, res) {
-  //var Chat = mongoose.model('Chat');
+  var Chat = mongoose.model('Chat');
   
   
   // すべてのToDoを取得して送る
@@ -117,7 +117,7 @@ app.get('/data/chat', function(req, res) {
 
   //Chat.find(null,{},{sort:{createdDate: 1}}, function(err, chats){
 
-    res.send("hello");
+    res.send(Chat);
 
 	
   //});
