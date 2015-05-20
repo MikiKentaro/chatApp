@@ -17,7 +17,22 @@ var app = express();
 
 // mongooseを用いてMongoDBに接続する
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/chatapp');
+
+module.exports.ready = function(db_name, callback){
+  if ( process.env.MONGOLAB_URI ){
+    // herokuの場合の処理
+    mongoose.connect(process.env.MONGOLAB_URI, {}, function(error, db){
+      callback(db);
+    });
+  }else{
+    // localの場合の処理
+    new mongoose.Db(db_name, new mongoose.Server('127.0.0.1', mongoose.Connection.DEFAULT_PORT, {}), {}).open(function(err,db){
+      callback(db);
+    });
+  }
+};
+
+//mongoose.connect('mongodb://localhost/chatapp');
 
 /* （略） */
 
