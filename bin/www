@@ -205,7 +205,9 @@ console.log('logout: ' + userlist[socket.id].chat);
 var delMemChat=userlist[socket.id].chat;
 	var delMemName=userlist[socket.id].name;
 	
-	io.emit('fin', "fin");
+	io.emit('fin', { name:delMemName,chat:delMemChat});
+	
+	
 	io.emit('delMemName',{ name:delMemName,chat:delMemChat});
 	
 

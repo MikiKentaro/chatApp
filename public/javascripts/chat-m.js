@@ -75,7 +75,7 @@ var EStext =escapeHTML(chat.message);
 
   //avatarOther();
 
-  //getList();
+  getList();
 });
 
 
@@ -240,7 +240,7 @@ avatarOther();
   socket.on('fin', function(fin) {
 
 
-   $.post('/data/chat', {delRoomName: chatRoom,delMemName: myName}, function(res) {
+   $.post('/data/chat', {delRoomName: fin.chat,delMemName: fin.name}, function(res) {
 
 
 });	
