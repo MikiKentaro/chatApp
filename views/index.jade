@@ -1,7 +1,9 @@
 ﻿extends layout
 
 block content
-  h1= title
+  div &nbsp;
+   br
+   br
 
   div#chatRogo
    a(href='/')
@@ -31,8 +33,8 @@ block content
 
   div#chatName
   
-  div#hikousen
-   img(src='images/hikousen.png', alt='サンプル')
+  //div#hikousen
+  // img(src='images/hikousen.png', alt='サンプル')
 
 
 
@@ -45,27 +47,37 @@ block content
   
   div#canvasbodar
   canvas(width='500', height='400')
+  
+  div(style='font-size:20px;') カラー
+  <input class="color" id="jscolor" value="#000000" style='width:140px'>
+
   ul
    li(style='background-color:#000')
+   li(style='background-color:#777')
+   li(style='background-color:#fff')
    li(style='background-color:#f00')
    li(style='background-color:#0f0')
    li(style='background-color:#00f')
    li(style='background-color:#ff0')
-   li(style='background-color:#fff')
+   li(style='background-color:#f0f')
+   li(style='background-color:#0ff')
   #button2
    input#save2(type='button', value='保存')
    input#clear2(type='button', value='消去')
 
-  input#spuit(type='radio', name='brush')
+  div スポイト
+   input#spuit(type='radio', name='brush')
   
+  //#nowcolor
   
-  #nowcolor
+
   
-  
-  div#backimage
-   img(src='images/backimage.png', alt='サンプル',id='ava0')
+  //div#backimage
+  // img(src='images/backimage.png', alt='サンプル',id='ava0' )
 
 
   script(src='javascripts/jquery-2.0.0.min.js')
   script(src='/socket.io/socket.io.js')
   script(src='javascripts/chat.js')
+  script(src='javascripts/jscolor.js')
+

@@ -10,33 +10,17 @@ var users = require('./routes/users');
 var mypage = require('./routes/mypage');
 var chat = require('./routes/index');
 
-//var sample=require('./routes/index');
 
 
 var app = express();
 
 // mongooseを用いてMongoDBに接続する
 var mongoose = require('mongoose');
-/*
-module.exports.ready = function(db_name, callback){
-  if ( process.env.MONGOLAB_URI ){
-    // herokuの場合の処理
-	
-    mongoose.connect(process.env.MONGOLAB_URI, {}, function(error, db){
-      callback(db);
-    });
-  }else{
-    // localの場合の処理
-    new mongoose.Db(db_name, new mongoose.Server('127.0.0.1', mongoose.Connection.DEFAULT_PORT, {}), {}).open(function(err,db){
-      callback(db);
-    });
-  }
-};
-*/
+
+
 var MONGO_URL = process.env.MONGOLAB_URI || 'mongodb://localhost/chatapp';
 
 var db = mongoose.connect(MONGO_URL);
-//mongoose.connect('mongodb://localhost/chatapp');
 
 /* （略） */
 
@@ -86,8 +70,6 @@ mongoose.model('prof', ProfSchema);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -136,9 +118,16 @@ app.get('/data/chat', function(req, res) {
 app.get('/data/chatprof', function(req, res) {
   var Chatprof = mongoose.model('ChatProf');
   // すべてのToDoを取得して送る
-  Chatprof.find({}, function(err, chatprof) {
+    Chatprof.find(null,{},{sort:{updatedDate: -1}}, function(err, chatprof){
+
     res.send(chatprof);
+
+	
   });
+
+ // Chatprof.find({}, function(err, chatprof) {
+ //   res.send(chatprof);
+ // });
 });
 
 app.get('/data/prof', function(req, res) {
@@ -151,12 +140,6 @@ app.get('/data/prof', function(req, res) {
     res.send(prof);
 	console.log("nuj")
   });
-  
- // Prof.remove({} , function(err, prof) {
- // });
-  
-  
-  
   
   
 });
@@ -180,16 +163,12 @@ if(DelRoomName && DelMemName) {
     var chat = new Chat();
     chat.chatText = DelMemName+"さんが退室しました。";
     chat.sender = "運営";
-    chat.chatName = DelRoomName;
+    chat.chatname = DelRoomName;
 	
     chat.save();
 
 
 };
-
-
-
-
 
 
  
@@ -198,7 +177,7 @@ if(DelRoomName && DelMemName) {
     var chat = new Chat();
     chat.chatText = NewMemName+"さんが入室しました。";
     chat.sender = "運営";
-    chat.chatName = NewMemRoomName;
+    chat.chatname = NewMemRoomName;
 	
     chat.save();
 
@@ -211,9 +190,10 @@ if(DelRoomName && DelMemName) {
     var chat = new Chat();
     chat.chatText = chatText;
     chat.sender = sender;
-    chat.chatName = Chatroom;
+    chat.chatname = Chatroom;
 	
     chat.save();
+	//console.log("AB"+Chatroom);
     res.send(true);
   } else {
     res.send(false);
@@ -229,13 +209,8 @@ app.post('/data/prof', function(req, res) {
   var toChatRoomName = req.body.ToChatRoomName;
   var toChatProfName =req.body.ToChatProfName;
   
-  
-  //console.log(toChatAvatar+toChatRoomName+toChatProfName);
   var BeChatRoom=req.body.BeChatroom;
   var BeMyName=req.body.BeMyname;
-  //var beRemove=req.body.BeRemove;
-  //var BeDeleatroom=req.body.BeDeleatRoom;
-  //var BeDeleatname=req.body.BeDeleatName;
 
 
 var DelRoomName=req.body.delRoomName;
@@ -250,70 +225,7 @@ Prof.remove({ chatroom : { $eq :DelRoomName }, name : { $eq :DelMemName }} , fun
 	});
 
 
-
-
-
 }
-
-
-
-
-/*
-
-
-
-if(BeChatRoom && BeMyName){
-	console.log("ggg");
-
-var Prof = mongoose.model('prof');
-    //var prof = new Prof();
-	
-Prof.remove({ chatroom : { $eq :BeChatRoom }, name : { $eq :BeMyName }} , function(err, profDel) {
-
-    //profDel.beChat=false;
-    
-    //profDel.save();
-
-	});
-
-}
-*/
-/*
-Prof.findOne({ chatroom : { $eq :BeChatRoom }, name : { $eq :BeMyName }} , function(err, profDel) {
-
-    profDel.beChat=false;
-    
-    profDel.save();
-	});
-	}
-else if(beRemove ){
-
-var Prof = mongoose.model('prof');
-
-Prof.remove({ beChat : { $eq :true }} , function(err, BeDel) {
-
-
-console.log("ggg");
-
-  });
-  }
-  
-  
-else if(BeDeleatroom && BeDeleatname ){
-var Prof2 = mongoose.model('prof');
-//Prof.findOne({ chatroom : { $eq :BeChatRoom }, name : { $eq :BeMyName }} , function(err, profDel) {
-
-  Prof2.find({ beChat : { $eq :false }} , function(err, profDels) {
-//	  console.log(profDels.beChat);
-
-    profDels[1].beChat="true";
-   // profDels. = true;
-
-    profDels[1].save();
-	});
-  
-}
-*/
 
 
   
@@ -330,12 +242,6 @@ var Prof2 = mongoose.model('prof');
     prof.save();
 
 
-
-//URL=toChatRoomName;
-
-
-//sample2(URL);
-
  Prof.count({ chatroom : { $eq :toChatRoomName }} , function(err, chatCountss) {
   //console.log(todoss);
 Hitokazu=chatCountss;
@@ -350,6 +256,7 @@ Hitokazu=chatCountss;
     res.send(false);
   }
 });
+
 app.post('/data/chatprof', function(req, res) {
   var newchatname = req.body.NewChatName;
     var toChatname = req.body.ToChatRoomName;
@@ -358,7 +265,6 @@ app.post('/data/chatprof', function(req, res) {
     var ChatProf = mongoose.model('ChatProf');
     var chatprof = new ChatProf();
     chatprof.chatname = newchatname;
-//	prof.updatedDate=Date.now;
     chatprof.save();
 
     res.send(true);
@@ -370,7 +276,8 @@ app.post('/data/chatprof', function(req, res) {
   
   ChatProf.findOne({ chatname : { $eq :toChatname }} , function(err, chatName) {
 chatName.chatCount=Hitokazu+1;
-  chatName.save();
+chatName.updatedDate=Date.now();
+chatName.save();
   
   
   });
@@ -379,12 +286,6 @@ chatName.chatCount=Hitokazu+1;
     res.send(false);
   }
 });
-
-
-//app.use('/'+URL,sample);
-
-
-
 
 
 

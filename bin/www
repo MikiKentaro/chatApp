@@ -120,16 +120,17 @@ socket.join(visitChat.chatname);
 io.sockets.in(visitChat.chatname).emit('visitChat', visitChat);
 
 	userlist[socket.id] = {name:visitChat.name,chat:visitChat.chatname,avatar:visitChat.avatar}; //add user info
-//userlistChat[socket.id]=visitChat.chatname;
 
+	io.emit('delMemName','delname');
+	
 
+       
 	 
 });
 
 
 socket.on('abc', function(abc) {
    
-//io.sockets.in(abc.chatname).emit('abc', abc);
 CHAT=abc.chatname;
 NAME=abc.name;
 console.log("abcName"+NAME);
@@ -150,12 +151,12 @@ io.sockets.in(socket.id).emit("rewriteMember", getMember(CHAT,NAME));
 
  // chatというイベントを受信したとき、送られた内容をすべてのクライアントに送信する
   socket.on('startadd', function() {
-    //console.log('message : ' + chat.message);
-    //io.emit('chat', chat);
+    
 	var socket_id = socket.id;
 	console.log('message : ' + socket_id);
 
-	io.to(socket_id).emit('event_name',socket_id);
+//	io.to(socket_id).emit('event_name',socket_id);
+
 
 
 	
@@ -166,16 +167,16 @@ io.sockets.in(socket.id).emit("rewriteMember", getMember(CHAT,NAME));
 
 
 // クライアントからメッセージ受信
-    socket.on('clear send', function () {
+    socket.on('clear send', function (clear) {
  
         // 自分以外の全員に送る
-        socket.broadcast.emit('clear user');
+        socket.broadcast.in(clear.chatname).emit('clear user');
     });
    // クライアントからメッセージ受信
     socket.on('server send', function (msg) {
  
         // 自分以外の全員に送る
-        socket.broadcast.emit('send user', msg);
+        socket.broadcast.in(msg.chatname).emit('send user', msg);
     });
 
 
@@ -198,57 +199,23 @@ io.sockets.in(socket.id).emit("rewriteMember", getMember(CHAT,NAME));
 	
 	 if(!(typeof userlist[socket.id] === "undefined")) {
 
-            console.log('logout: ' + userlist[socket.id].name);
-			            console.log('logout: ' + userlist[socket.id].chat);
+console.log('logout: ' + userlist[socket.id].name);
+console.log('logout: ' + userlist[socket.id].chat);
 
-            //console.log('logout: ' + userlistChat[socket.id]);
-
-//io.sockets.emit('message', 'logout: ' + userlist[socket.id]);
 var delMemChat=userlist[socket.id].chat;
 	var delMemName=userlist[socket.id].name;
 	
+	io.emit('fin', "fin");
 	io.emit('delMemName',{ name:delMemName,chat:delMemChat});
 	
-	//$.post('/data/chat', {delRoomName:delMemChat ,delMemName: delMemName}, function(res) {
 
-
-//});	
-	
-	
-//io.sockets.in(userlistChat[socket.id]).emit('delMemName',"del",{ name:delMemName,chat:delMemChat});
-
-
-
-
-
-
-
-            delete userlist[socket.id]; //delete user info
-//delete userlistChat[socket.id];
+          delete userlist[socket.id]; //delete user info
 
         }
-   // io.emit('fin', "fin");
-
-	
-
-	
-	
-	
-	
 	
 	
   });
-  
-  
- 
-  
-  
-  
-  
-  
-  
-  
-  
+   
   
   
 });

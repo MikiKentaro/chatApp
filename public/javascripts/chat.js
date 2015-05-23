@@ -1,20 +1,18 @@
 ﻿
 $(function() {
 firstView();
-    getList();
-	//avatarOther();
-
-//	abc=50;
+    //getList();
 	
 socket.emit('startadd', 'abc');
 
+//alert($("#jscolor").val());
 
-	
+//$("#jscolor").val("#00ff00");	
+//$("#jscolor").color.fromString('F2C80A')
+//var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
+//myPicker.fromString('#99FF33')  // now you can access API via 'myPicker' variable
 });
 
-
-
-//var abc;
 
 
 
@@ -24,15 +22,13 @@ var chatRoom;
 var myID;
 
 
+var offset = 5;
+var fromX;
+var fromY;
+var drawFlag = false;
+var context = $("canvas").get(0).getContext('2d');
 
 
-
-
-	var offset = 5;
-    var fromX;
-    var fromY;
-    var drawFlag = false;
-    var context = $("canvas").get(0).getContext('2d');
 
 var socket = io();
 
@@ -41,30 +37,15 @@ socket.on("rewriteMember", function (allMemberName) {
                 $("#chatAvatarOther").html(allMemberName);
             });
 
-socket.on('event_name', function(socket_id) {
-
-//alert(socket_id);
-
-});
 
 socket.on('delMemName', function(delMemName) {
 
-//alert(delMemName.name);
-
-$.post('/data/chat', {delRoomName: delMemName.chat,delMemName:delMemName.name}, function(res) {
 
 
-});	
-
-$.post('/data/prof', {delRoomName: delMemName.chat,delMemName:delMemName.name}, function(res) {
-
-
-});	
-
-
-
-getList();
+//getList();
 avatarOther();
+getList();
+
 });
 
 
@@ -74,21 +55,7 @@ socket.on('abc', function(abc) {
 });
 // chatというイベントを受信したらHTML要素に追加する
 socket.on('chat', function(chat) {
-/*
-  var messages = document.getElementById('messages');
-  // 新しいメッセージは既にある要素より上に表示させる
-  
-  //if(chat.name=='ken'){
-  var newChat = '<div>' + chat.name + '「' + chat.message + '」</div>';
-  //}else{
-  //var newChat = '<li>' + 'other' + '「' + chat.message + '」</li>';
 
-  //}
-  
-  var oldChat = messages.innerHTML;
-  messages.innerHTML = newChat + oldChat;
-  */
-  
   
   
   
@@ -98,9 +65,12 @@ var avatarOffset=$('#'+abbb).offset();
 
 
 var leftpos=avatarOffset.left;
+
+var EStext =escapeHTML(chat.message);
+
   
-    var hukidasi = document.getElementById('hukidasiList');
-  var newChat = '<div class="hukiMesse" style="position:relative; left: '+leftpos+'px;">' + chat.message + '</div>';
+  var hukidasi = document.getElementById('hukidasiList');
+  var newChat = '<div class="hukiMesse" style="position:relative; left: '+leftpos+'px;">' + EStext + '</div>';
 
 
 
@@ -109,9 +79,9 @@ var leftpos=avatarOffset.left;
   
   
 
-  avatarOther();
+  //avatarOther();
 
-  getList();
+  //getList();
 });
 
 
@@ -161,28 +131,38 @@ function getList() {
                 // 取得したToDoを追加していく
                 $.each(chats, function(index, Chat) {
                     //タイトルにすTodoを表示
+					
+					
+					if(Chat.chatname==chatRoom){
 				var time = new Date(Chat.createdDate);
             var hour = time.getHours(); // 時
             var min = time.getMinutes(); // 分
 				
 				if (min < 10) min = "0" + min;
 				
-				var EStext=escape(Chat.chatText);
-				console.log(EStext);
+				
+				//var EStext=escape(Chat.chatText);
+				var EStext =escapeHTML(Chat.chatText);
+				//console.log("escape:"+EStext);
+				
+				
+				//console.log(EStext);
 				//EStext=text(EStext);
 			         //$list.append('<table id=chatTable><td><div class="chattext">' + Chat.chatText + '</div></td>'+
 					 //'<td><div>'+hour+':'+min+'</div><div> ' + Chat.sender + '</div></td></table>');
 
-					 var htmltext='<table id=chatTable><td><div class="chattext">' + EStext + '</div></td>'+
+					 var htmltext='<table id="chatTable"><td><div class="chattext">' + EStext + '</div></td>'+
 					 '<td><div>'+hour+':'+min+'</div><div> ' + Chat.sender + '</div></td></table>';
 			
                         num += 1;
-						console.log(htmltext);
-						htmltext=unescape(htmltext);
-						console.log(htmltext);
-						$list.append(htmltext);
+						
+						
+						//console.log(htmltext);
+						//htmltext=unescape(htmltext);
+						//console.log(htmltext);
+						$list.append(unescape(htmltext));
 		
-                    
+                    }
                 });
                 // 一覧を表示する
 			    
@@ -194,17 +174,17 @@ function getList() {
 			var pos = $(".hukidasi");
 var position = pos.position();
 
-	/*
-	var $kome = $('.kome');
-	$kome.append('<div class="sen'+abc+'">aaa</div>');
-	$(".sen"+abc).css({
-  
-  'position':'relative',
-  'left' : abc
 
-});
-*/
     }
+	
+	function escapeHTML(val) {
+        return $('<div>').text(val).html();
+    };
+	
+	function unescapeHTML(val) {
+        return $('<div>').html(val).text();
+    };
+	
 	
 	
 function postList() {
@@ -226,6 +206,8 @@ function postList() {
         //再度表示する
        
     });
+ getList();
+	
 }
 
 function firstView(){
@@ -243,7 +225,7 @@ var $avatarMe = $('#chatAvatarMe');
 
 
  var $chatName = $('#chatName');
-$chatName.append(chatRoom);
+$chatName.append('<div style="font-size:15px;">チャット名'+'</div>'+chatRoom);
 $chatName.fadeIn();
 
 
@@ -258,17 +240,6 @@ $chatName.fadeIn();
 avatarOther();
 
 }
-/*
-$('#random').click(function() {
-   abc+=100;
-   
-$('.hukidasi').css({
-  'left' : abc,
-});
-	$(".hukidasi").html("hh");
-
-});
-*/
 
 
 //接続が切れた時
@@ -283,8 +254,8 @@ $('.hukidasi').css({
    
 
  
- avatarOther();
- getList();
+ //avatarOther();
+ //getList();
 
  
  
@@ -296,15 +267,18 @@ $('.hukidasi').css({
  socket.on('start', function(start) {
 
 
-   avatarOther();
-getList();
+   //avatarOther();
+//getList();
 
  
 });
 
 function avatarOther(){
 
-//alert("aww");
+var hukidasi = document.getElementById('hukidasiList');
+
+hukidasi.innerHTML ='';
+
 
 socket.emit('abc', {
     name:myName,
@@ -312,6 +286,7 @@ socket.emit('abc', {
 	avatar:myAvatar
   });
 	
+//getList();
 		
 }
 
@@ -379,14 +354,22 @@ socket.emit('abc', {
     r = spuitImage.data[0];
     g = spuitImage.data[1];
     b = spuitImage.data[2];
+	a = spuitImage.data[3];
+	if(a==0){
+	return;
+	}
     spuit_color = 'rgb(' + r +','+ g + ',' + b +')';
 	var ret = eval(spuit_color.replace(/rgb/,"((").replace(/,/ig,")*256+")).toString(16); 
 	ret="#" + (("000000" + ret).substring( 6 + ret.length - 6));
 	context.strokeStyle=ret;
-	console.log(ret)
-	$('#nowcolor').css({
-		"background-color": ret
-		});
+	console.log(ret);
+	console.log(a)
+
+	//$('#nowcolor').css({
+	//	"background-color": ret
+	//	});
+var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
+myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicker' variable
 
 	
 	}else{}
@@ -422,13 +405,19 @@ socket.emit('abc', {
  
     $('li').click(function() {
         context.strokeStyle = $(this).css('background-color');
-		$('#nowcolor').css({
-		"background-color": context.strokeStyle
-		});
+		//$('#nowcolor').css({
+		//"background-color": context.strokeStyle
+		//});
+		//$("#jscolor").val(context.strokeStyle);
+var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
+myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicker' variable
+//	context.strokeStyle=$("#jscolor").val();
+
+
     });
  
     $('#clear2').click(function(e) {
-        socket.emit('clear send');
+        socket.emit('clear send',{ chatname:chatRoom });
         e.preventDefault();
         context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
     });
@@ -442,21 +431,23 @@ socket.emit('abc', {
         context.lineTo(toX, toY);
         context.stroke();
         context.closePath();
- 
+		var iro="#"+$("#jscolor").val();
+		context.strokeStyle =iro;
+		
         // サーバへメッセージ送信
-        socket.emit('server send', { fx:fromX, fy:fromY, tx:toX, ty:toY, color:context.strokeStyle });
-        console.log("bsss");
+        socket.emit('server send', { fx:fromX, fy:fromY, tx:toX, ty:toY, color:context.strokeStyle, chatname:chatRoom });
+        console.log(iro);
 
 		fromX = toX;
         fromY = toY;
     }
- 
+ /*
     $('#save2').click(function() {
         var d = $("canvas")[0].toDataURL("image/png");
         d = d.replace("image/png", "image/octet-stream");
         window.open(d,"save");
     });
-
+*/
 
 socket.on('connect',    function(){
 
@@ -467,8 +458,8 @@ $.post('/data/chat', {newMemRoomName: chatRoom,newMemName: myName}, function(res
 
 
 });	
-getList();
-avatarOther();
+//getList();
+//avatarOther();
 });
 
 
@@ -483,8 +474,10 @@ $('canvas').mouseup(function(e) {
 
 $("#spuit").click(function(){
  $('body').css({
-		//"cursor": "url('images/green.jpg'), text"
+		//"cursor": "url('spoit.cur'), text"
 		});
 		});
 		
 		//$('#send').click(function() 
+		
+	

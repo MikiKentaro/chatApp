@@ -1,43 +1,34 @@
-﻿
-
-
-
-$(function() {
+﻿$(function() {
     getList();
 	
 var avatar = document.getElementsByName("avatar"); 
 for(var i=0;i<avatar.length;i++) {   
-	
            avatar[0].checked=true;
     }  
 	
-	
-	
-	
 myName=sessionStorage.getItem('myName');
 chatRoom=sessionStorage.getItem('toChat');	
+myAvatar=sessionStorage.getItem('myAvatar');
+
 	
-if(myName!=""&&chatRoom!=""){
+if(myName!=""&&chatRoom!=""&&myAvatar!=""){
 $.post('/data/prof', {BeChatroom:chatRoom,BeMyname:myName}, function(res) {
 	
-      //  console.log(res);
-	 
        
    });
-
-
+var nameform = $('#name');
+nameform.val(myName);
+for(var i=0;i<avatar.length;i++) {   
+           avatar[myAvatar].checked=true;
+    }  
 }else{
-alert("aa")
+//alert("aa")
+
 }	
-	
-	
 	
 });
 
-
 $('#send').click(function() {
-	//postList();
-	//saveStrage();
 	
 });
 
@@ -45,7 +36,6 @@ $('#plusChatButton').click(function() {
 
 	  document.getElementById("plusChat").innerHTML = '<input type="text" size="25" id="newchat" placeholder="新しいチャット名を入力してください">'+
 	  '<button id="NewChatButton" type="button">作成</button>';
-	  //document.getElementById("plusChat").innerHTML = ''
 	  
 $('#NewChatButton').click(function() {
 
@@ -59,7 +49,6 @@ $('#serch').click(function() {
 
 	  document.getElementById("topMesse").innerHTML = '<input type="text" size="25" id="serchForm" placeholder="検索ワードを入力してください">'+
 	  '<button id="serchButton" type="button">検索</button>';
-	  //document.getElementById("plusChat").innerHTML = ''
 	  
 $('#serchButton').click(function() {
 
@@ -104,14 +93,11 @@ function getList() {
             $.get('data/chatprof', function(chatprof) {
                 // 取得したToDoを追加していく
                 $.each(chatprof, function(index, Chatprof) {
-                    //タイトルにすTodoを表示
-                    
-					
-					
-				//	alert('aa');
-					 $roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'   ' +Chatprof.chatCount+'人</a></div>');
+                    //タイトルにすTodoを表示					
+					 $roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'</a></div>');
+					 //$roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'   ' +Chatprof.chatCount+'人</a></div>');
                         
-                        //num += 1;
+                      
                     
                 });
                 // 一覧を表示する
@@ -122,7 +108,6 @@ function getList() {
 				
 				postChatIn(roomname);
 				
-                //alert(roomname);
                 });
 				
 				
@@ -137,14 +122,11 @@ function postList() {
    
     var profname = $('#name').val();
 
-　　//var profprof = $('#text').val();
-//	    $('#text').val('');
 var profprof="chat1";
 var avatarNum="1";
 
 var newChatName=$('#newchat').val();
 
-//if(checkAcount()){
 		alert("dd");
     //入力項目を空にする
     // /todoにPOSTアクセスする
@@ -152,58 +134,15 @@ var newChatName=$('#newchat').val();
 
         console.log(res);
         //再度表示する
-        //getList();
     });
-//	}
 }
 
 function saveStrage(){
 
- 
-
-
-
 
 }
 
-/*
-function checkAcount(profname){
 
-var beword;
-beword=false;
-//alert(profname);
- $.get('data/prof', function(prof) {
-                
-                $.each(prof, function(index, Prof) {
-  
-					if(profname===Prof.name){
-					alert("ss");
-					beword=true;
-					return;
-					}
-                    
-                });
-                
-				//alert("同じのなかった");
-
-//return true;
-				if(beword==false){
-				alert("同じのなかった");
-return true;
-
-}else{
-alert("同じのあった");
-return false;
-
-}
-				// 一覧を表示する
-            });
-
-			
-			
-
-}
-*/
 function postList2() {
     // フォームに入力された値を取得
    
@@ -211,8 +150,6 @@ function postList2() {
 
 var newChatName=$('#newchat').val();
 	    $('#newchat').val('');
-
-
     //入力項目を空にする
     // /todoにPOSTアクセスする
     $.post('/data/chatprof', {NewChatName: newChatName}, function(res) {
@@ -221,7 +158,6 @@ var newChatName=$('#newchat').val();
         //再度表示する
         getList();
     });
-//	}
 }
 
 
@@ -243,14 +179,7 @@ alert(avatarNum);
    
     var profname = $('#name').val();
 
-　　//var profprof = $('#text').val();
 	    $('#name').val('');
-
-   
-   
-   
-   
-alert(roomname);
 
     //入力項目を空にする
     // /todoにPOSTアクセスする
@@ -261,9 +190,6 @@ alert(roomname);
         //再度表示する
        
  });
- 
- 
- 
  
  　$.post('/data/chatprof', {ToChatRoomName: roomname}, function(res) {
    });
@@ -296,7 +222,9 @@ var $roomlist = $('.roomlist');
 				
 					if(Chatprof.chatname.indexOf(serchWord) != -1){
 
-   					 $roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'   ' +Chatprof.chatCount+'人</a></div>');
+   					 $roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname+'</a></div>');
+
+   					 //$roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'   ' +Chatprof.chatCount+'人</a></div>');
 
 					 //$roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'   ' +Chatprof.chatCount+'人</a></div>');
 

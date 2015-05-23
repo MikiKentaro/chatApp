@@ -1,0 +1,48 @@
+﻿extends layout
+
+block content
+  h1 &nbsp;
+
+  div#chatRogo_m
+   a(href='/')
+    img(src='images/rogo.png', alt='サンプル')
+
+
+  //label(for='name') 名前
+  //input(type='text',id='name')
+  //button#send2 送信
+  
+  div#textform_m
+   label(for='text') 内容
+   input(type='text',id='text_m',size="50", maxlength="100",placeholder="つぶやきを入力してください")
+   button#send_m 送信
+
+  div#hukidasiList_m 
+
+
+
+  div#chatAvatar_m
+   div#chatAvatarMe_m
+   div#chatAvatarOther_m
+
+  div#chatName_m
+  
+
+
+
+  #messages
+  .list_m
+  
+  
+  
+
+  
+  //div#backimage
+  // img(src='images/backimage.png', alt='サンプル',id='ava0' )
+
+
+  script(src='javascripts/jquery-2.0.0.min.js')
+  script(src='/socket.io/socket.io.js')
+  script(src='javascripts/chat-m.js')
+  script(src='javascripts/jscolor.js')
+
