@@ -73,12 +73,18 @@
     cCtx.drawImage(vEle, 0, 0);  // canvasに関数実行時の動画のフレームを描画
 }
 
-	$('canvas').addEventListener( 'touchstart', function(e){
+   //document.body.mousedown(function(e) {
+
+	$('canvas').bind( 'touchstart', function(e){
+	event.preventDefault();
 alert("sssss");
 
 });
-//    $('canvas').mousemove(function(e) {
-	$('canvas').addEventListener( 'touchmove', function(e){
+
+
+
+    $('canvas').mousemove(function(e) {
+//	$('canvas').addEventListener( 'touchmove', function(e){
 	e.preventDefault();
 	
 	//var getspuit = $('#spuit').is(':checked');
