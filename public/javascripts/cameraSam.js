@@ -132,7 +132,7 @@ var context = $("canvas").get(0).getContext('2d');
 	// if (drawFlag){
 	var spoiX = e.originalEvent.changedTouches[0].pageX; - $('canvas').offset().left - offset;
     var spoiY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
-	console.log(spoiX);
+	console.log(spoiY);
     spuitImage = context.getImageData(spoiX, spoiY, 1, 1);
     r = spuitImage.data[0];
     g = spuitImage.data[1];
@@ -148,7 +148,8 @@ var context = $("canvas").get(0).getContext('2d');
 		"background-color": ret
 		});
 
-	
+	//var deb=$('#debug');
+	document.getElementById('debug').innerHTML="spoiX"+spoiX+"spoiY"+spoiY+"ret"+ret;
 	
 	
     
