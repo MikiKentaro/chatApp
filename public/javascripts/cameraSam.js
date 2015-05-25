@@ -72,3 +72,39 @@
 
     cCtx.drawImage(vEle, 0, 0);  // canvasに関数実行時の動画のフレームを描画
 }
+
+
+
+
+
+    $('canvas').mousemove(function(e) {
+	
+	
+	//var getspuit = $('#spuit').is(':checked');
+    //if(getspuit == true){
+	// if (drawFlag){
+	var spoiX = e.pageX - $('canvas').offset().left - offset;
+    var spoiY = e.pageY - $('canvas').offset().top - offset;
+    spuitImage = context.getImageData(spoiX, spoiY, 1, 1);
+    r = spuitImage.data[0];
+    g = spuitImage.data[1];
+    b = spuitImage.data[2];
+	
+    spuit_color = 'rgb(' + r +','+ g + ',' + b +')';
+	var ret = eval(spuit_color.replace(/rgb/,"((").replace(/,/ig,")*256+")).toString(16); 
+	ret="#" + (("000000" + ret).substring( 6 + ret.length - 6));
+	context.strokeStyle=ret;
+	
+
+	$('#nowcolor').css({
+		"background-color": ret
+		});
+
+	
+	
+	
+    
+	
+        
+	
+    });
