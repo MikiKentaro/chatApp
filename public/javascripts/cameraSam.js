@@ -1,4 +1,16 @@
 ﻿      $(function(){
+	  
+	  
+
+	  
+	  
+	  
+	  
+	  //$("canvas").bind("touchmove", touchHandler);
+	  //$("canvas").bind("touchstart", touchHandlerdown);
+
+
+	  
       //カメラの情報を取得
       var cameraData = [];
       MediaStreamTrack.getSources(function(data){
@@ -75,23 +87,52 @@
 
    //document.body.mousedown(function(e) {
 
+var fromX;
+var fromY;
+var offset=5;
+var context = $("canvas").get(0).getContext('2d');
+
+
+
+
 	$('canvas').bind( 'touchstart', function(e){
-	event.preventDefault();
-alert("sssss");
+	//event.preventDefault();
+//alert("sssss");
+//fromX = e.pageX - $(this).offset().left - offset;
+//        fromY = e.pageY - $(this).offset().top - offset;
+//        return false;  // for chrome
+//console.log(e.pageX);
 
 });
 
 
 
-    $('canvas').mousemove(function(e) {
-//	$('canvas').addEventListener( 'touchmove', function(e){
-	e.preventDefault();
+
+//function touchHandlerdown( event ) {
+
+        
+        
+		
+ //   };
+
+//function touchHandler( event ) {
+//event.preventDefault();
+//    $('canvas').mousemove(function(e) {
+
+
+
+	$('canvas').bind( 'touchmove', function(e){
+	
+	
+	
+	//e.preventDefault();
 	
 	//var getspuit = $('#spuit').is(':checked');
     //if(getspuit == true){
 	// if (drawFlag){
-	var spoiX = e.pageX - $('canvas').offset().left - offset;
-    var spoiY = e.pageY - $('canvas').offset().top - offset;
+	var spoiX = e.originalEvent.changedTouches[0].pageX; - $('canvas').offset().left - offset;
+    var spoiY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
+	console.log(spoiX);
     spuitImage = context.getImageData(spoiX, spoiY, 1, 1);
     r = spuitImage.data[0];
     g = spuitImage.data[1];
@@ -101,7 +142,7 @@ alert("sssss");
 	var ret = eval(spuit_color.replace(/rgb/,"((").replace(/,/ig,")*256+")).toString(16); 
 	ret="#" + (("000000" + ret).substring( 6 + ret.length - 6));
 	context.strokeStyle=ret;
-	
+	console.log(ret)
 
 	$('#nowcolor').css({
 		"background-color": ret
@@ -114,4 +155,4 @@ alert("sssss");
 	
         
 	
-    }, false);
+    });
