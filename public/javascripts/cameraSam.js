@@ -90,7 +90,9 @@
 var fromX;
 var fromY;
 var offset=5;
-var context = $("canvas").get(0).getContext('2d');
+var cEle = document.getElementById('c');
+var context = cEle.getContext('2d');
+//var context = $("canvas").getContext('2d');
 
 
 
