@@ -50,7 +50,11 @@ socket.on('abc', function(abc) {
 // chatというイベントを受信したらHTML要素に追加する
 socket.on('chat', function(chat) {
 
-  
+  if(chat.message==""||chat.message.length>=101){
+ 
+//alert("1文字以上100文字以内で入力してください");
+return;
+}
   
   
   var abbb;
@@ -190,6 +194,11 @@ function postList() {
 	
 	    $('#text_m').val('');
 	
+	if(chattext==""||chattext.length>=101){
+ 
+alert("1文字以上100文字以内で入力してください");
+return;
+}
 
 	
     //入力項目を空にする
@@ -200,7 +209,7 @@ function postList() {
         //再度表示する
        
     });
- getList();
+ //getList();
 	
 }
 
@@ -218,9 +227,18 @@ var $avatarMe = $('#chatAvatarMe_m');
 	  document.getElementById("chatAvatarMe_m").innerHTML = '<div id="'+myName+'"><div>'+myName+'</div><img src="images/avatar'+myAvatar+'.png" alt="サンプル"></div>';	
 
 
+var ESchatRoom =escapeHTML(chatRoom);
+					 
  var $chatName = $('#chatName_m');
-$chatName.append('<div style="font-size:15px;">チャット名'+'</div>'+chatRoom);
+
+
+$chatName.append(unescape('<div style="font-size:15px;">チャット名'+'</div>'+ESchatRoom));
 $chatName.fadeIn();
+
+
+// var $chatName = $('#chatName_m');
+//$chatName.append('<div style="font-size:15px;">チャット名'+'</div>'+chatRoom);
+//$chatName.fadeIn();
 
 
  socket.emit('visitChat', {

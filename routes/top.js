@@ -1,4 +1,4 @@
-var express = require('express');
+﻿var express = require('express');
 var router = express.Router();
 
 
@@ -13,14 +13,14 @@ userAgent = req.headers['user-agent'].toLowerCase();
 
 
 
-    // �\������y�[�W�o������
+    // 表示するページ出し分け
     if(userAgent.indexOf("android") != -1
              || userAgent.indexOf("iphone") != -1
              || userAgent.indexOf("ipod") != -1){
-        res.render('top_m', {title: 'top mobile'});
+        res.render('top_m', {title: 'ライドロチャット-モバイル トップページ'});
     }
     else{
-        res.render('top', {title:'top pc'});
+        res.render('top', {title:'ライドロチャット トップページ'});
     }
 
 //}

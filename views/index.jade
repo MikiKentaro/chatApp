@@ -4,6 +4,9 @@ block content
   div &nbsp;
    br
    br
+   br
+   br
+   br
 
   div#chatRogo
    a(href='/')
@@ -17,7 +20,7 @@ block content
   div#textform
    label(for='text') 内容
    input(type='text',id='text',size="50", maxlength="100",placeholder="つぶやきを入力してください")
-   button#send 送信
+   button#send(style="cursor:pointer;") 送信
 
   div#hukidasiList 
 
@@ -62,11 +65,11 @@ block content
    li(style='background-color:#f0f')
    li(style='background-color:#0ff')
   #button2
-   input#save2(type='button', value='保存')
-   input#clear2(type='button', value='消去')
+   input#save2(type='button', value='保存',style="cursor:pointer;")
+   input#clear2(type='button', value='消去',style="cursor:pointer;")
 
   div スポイト
-   input#spuit(type='radio', name='brush')
+   input#spuit(type='radio', name='brush',style="cursor:pointer;")
   
   //#nowcolor
   

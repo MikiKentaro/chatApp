@@ -118,7 +118,7 @@ app.get('/data/chat', function(req, res) {
 app.get('/data/chatprof', function(req, res) {
   var Chatprof = mongoose.model('ChatProf');
   // すべてのToDoを取得して送る
-    Chatprof.find(null,{},{sort:{updatedDate: -1}}, function(err, chatprof){
+    Chatprof.find(null,{},{sort:{updatedDate: -1},limit:12}, function(err, chatprof){
 
     res.send(chatprof);
 

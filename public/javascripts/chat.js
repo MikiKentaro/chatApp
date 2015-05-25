@@ -58,6 +58,12 @@ socket.on('chat', function(chat) {
 
   
   
+  if(chat.message==""||chat.message.length>=101){
+ 
+//alert("1文字以上100文字以内で入力してください");
+return;
+}
+
   
   var abbb;
   abbb=chat.name;
@@ -196,7 +202,11 @@ function postList() {
 	
 	    $('#text').val('');
 	
-
+if(chattext==""||chattext.length>=101){
+ 
+alert("1文字以上100文字以内で入力してください");
+return;
+}
 	
     //入力項目を空にする
     // /todoにPOSTアクセスする
@@ -223,8 +233,19 @@ var $avatarMe = $('#chatAvatarMe');
 	  document.getElementById("chatAvatarMe").innerHTML = '<div id="'+myName+'"><div>'+myName+'</div><img src="images/avatar'+myAvatar+'.png" alt="サンプル"></div>';	
 
 
+var ESchatRoom =escapeHTML(chatRoom);
+					 
+					 
+
+   					 //var htmltext='<div class="roomname" name="'+EStext+'">' + EStext+'</div>';
+
+                     //$roomlist.append(unescape(htmltext));
+
+
  var $chatName = $('#chatName');
-$chatName.append('<div style="font-size:15px;">チャット名'+'</div>'+chatRoom);
+
+
+$chatName.append(unescape('<div style="font-size:15px;">チャット名'+'</div>'+ESchatRoom));
 $chatName.fadeIn();
 
 

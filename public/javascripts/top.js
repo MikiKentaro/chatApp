@@ -25,7 +25,7 @@ for(var i=0;i<avatar.length;i++) {
 //alert("aa")
 
 }	
-	
+
 });
 
 $('#send').click(function() {
@@ -94,10 +94,15 @@ function getList() {
                 // 取得したToDoを追加していく
                 $.each(chatprof, function(index, Chatprof) {
                     //タイトルにすTodoを表示					
-					 $roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'</a></div>');
-					 //$roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'   ' +Chatprof.chatCount+'人</a></div>');
-                        
-                      
+					 
+                     var EStext =escapeHTML(Chatprof.chatname);
+					 
+					 
+
+   					 var htmltext='<div class="roomname" name="'+EStext+'">' + EStext+'</div>';
+
+                     $roomlist.append(unescape(htmltext));
+
                     
                 });
                 // 一覧を表示する
@@ -150,6 +155,15 @@ function postList2() {
 
 var newChatName=$('#newchat').val();
 	    $('#newchat').val('');
+		
+		
+		
+		if(newChatName==""||newChatName.length>=11){
+ 
+alert("1文字以上10文字以内で入力してください");
+return;
+}
+
     //入力項目を空にする
     // /todoにPOSTアクセスする
     $.post('/data/chatprof', {NewChatName: newChatName}, function(res) {
@@ -174,12 +188,25 @@ for(var i=0;i<avatar.length;i++) {
 		   avatarNum=i;
 		   }
     }  
-alert(avatarNum);
+//alert(avatarNum);
 //アバター番号　ここまで
    
     var profname = $('#name').val();
 
 	    $('#name').val('');
+		
+		if(profname==""||profname.length>=11){
+ 
+alert("1文字以上10文字以内で入力してください");
+return;
+}
+
+if(profname.indexOf(">") != -1||profname.indexOf("<") != -1||profname.indexOf("&") != -1){
+alert("<>&の使用は控えてください");
+return;
+
+
+}
 
     //入力項目を空にする
     // /todoにPOSTアクセスする
@@ -199,6 +226,7 @@ sessionStorage.setItem('myName',profname);
 sessionStorage.setItem('myAvatar',avatarNum);
 sessionStorage.setItem('toChat',roomname);
 
+window.location.href = "/chat";
 
 
 
@@ -212,6 +240,13 @@ var serchWord= $('#serchForm').val();
 
 $('#serchForm').val='';
 
+if(serchWord==""||serchWord.length>=11){
+ 
+alert("1文字以上10文字以内で入力してください");
+return;
+}
+
+
 var $roomlist = $('.roomlist');
         $roomlist.fadeOut(function() {
 		
@@ -222,8 +257,13 @@ var $roomlist = $('.roomlist');
 				
 					if(Chatprof.chatname.indexOf(serchWord) != -1){
 
-   					 $roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname+'</a></div>');
+                     var EStext =escapeHTML(Chatprof.chatname);
+					 
+					 
 
+   					 var htmltext='<div class="roomname" name="'+EStext+'">' + EStext+'</div>';
+
+                     $roomlist.append(unescape(htmltext));
    					 //$roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'   ' +Chatprof.chatCount+'人</a></div>');
 
 					 //$roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'   ' +Chatprof.chatCount+'人</a></div>');
@@ -249,3 +289,25 @@ var $roomlist = $('.roomlist');
         });
 	
     }
+	
+	
+		function escapeHTML(val) {
+        return $('<div>').text(val).html();
+    };
+	
+	
+	
+	/*
+					var EStext =escapeHTML(Chat.chatText);
+				
+					 var htmltext='<table id="chatTable"><td><div class="chattext">' + EStext + '</div></td>'+
+					 '<td><div>'+hour+':'+min+'</div><div> ' + Chat.sender + '</div></td></table>';
+			
+                       
+						
+						$list.append(unescape(htmltext));
+
+	
+	
+	
+	*/
