@@ -125,7 +125,7 @@ var context = $("canvas").get(0).getContext('2d');
 	
 	
 	
-	//e.preventDefault();
+	e.preventDefault();
 	
 	//var getspuit = $('#spuit').is(':checked');
     //if(getspuit == true){
