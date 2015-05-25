@@ -74,11 +74,12 @@
 }
 
 	$('canvas').addEventListener( 'touchstart', function(e){
-alert("sssss")
+alert("sssss");
 
 });
 //    $('canvas').mousemove(function(e) {
 	$('canvas').addEventListener( 'touchmove', function(e){
+	e.preventDefault();
 	
 	//var getspuit = $('#spuit').is(':checked');
     //if(getspuit == true){
@@ -107,4 +108,4 @@ alert("sssss")
 	
         
 	
-    });
+    }, false);
