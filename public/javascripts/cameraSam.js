@@ -67,16 +67,16 @@
     var cCtx = cEle.getContext('2d');
     var vEle = document.getElementById('myVideo');
 
-    cEle.width  = vEle.videoWidth;   // canvasの幅と高さを、動画の幅と高さに合わせる
-    cEle.height = vEle.videoHeight;
+    cEle.width  = 300px;   // canvasの幅と高さを、動画の幅と高さに合わせる
+    cEle.height = 300px;
 
     cCtx.drawImage(vEle, 0, 0);  // canvasに関数実行時の動画のフレームを描画
 }
 
+	$('canvas').addEventListener( 'touchstart', function(e){
+alert("sssss")
 
-
-
-
+});
 //    $('canvas').mousemove(function(e) {
 	$('canvas').addEventListener( 'touchmove', function(e){
 	
