@@ -1,4 +1,4 @@
-doctype html
+ï»¿doctype html
 html
   head
     meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;')
@@ -8,72 +8,8 @@ html
     title
     |   
     script(src='//code.jquery.com/jquery-1.11.0.min.js')
-    |   
-    script(type='text/javascript').
-      $(function(){
-      //ƒJƒƒ‰‚Ìî•ñ‚ğæ“¾
-      var cameraData = [];
-      MediaStreamTrack.getSources(function(data){
-      //ƒJƒƒ‰î•ñ‚ğæ“¾‚µ‚ÄAo—Í‚·‚é
-      var strCamera = "";
-      var len = data.length;
-      for( var i = 0 ; i < len ; i ++ ){
-      strCamera += "<p>í—ŞF"+ data[i].kind+"<br/>IDF"+ data[i].id+"</p>";
-      if( data[i].kind == "video" ){
-      cameraData.push(data[i]);
-      }
-      }
-      if( cameraData.length == 0 ){
-      alert("ƒJƒƒ‰‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
-      return;
-      }
-      $("#result").html( strCamera );
-      //ƒJƒƒ‰‚ğæ“¾EØ‚è‘Ö‚¦‚é
-      setCamera();
-      });
-      //ƒJƒƒ‰‚ğæ“¾EØ‚è‘Ö‚¦‚é
-      var cnt = 0;
-      var localStream = null;
-      function setCamera(){
-      //ƒJƒƒ‰‚ğ‡”Ô‚ÉØ‚è‘Ö‚¦‚é
-      cnt++;
-      if( cnt == cameraData.length ){
-      cnt = 0;
-      }
-      //ƒJƒƒ‰æ“¾
-      var video = document.getElementById('myVideo');
-      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || window.navigator.mozGetUserMedia;
-      window.URL = window.URL || window.webkitURL;
-      //ƒJƒƒ‰Ä¶’†‚Ìê‡‚ÍØ‚è‘Ö‚¦‚Ì‚½‚ßAˆê’U’â~‚·‚é
-      if( localStream ){
-      localStream.stop();
-      }
-      //ƒJƒƒ‰‚ğID‚ğg—p‚µ‚Äæ“¾‚·‚é
-      navigator.getUserMedia(
-      {
-      video: {
-      optional: [{sourceId: cameraData[cnt].id }] //ƒJƒƒ‰ID‚ğ’¼Úw’è‚·‚é
-      },
-      audio: false
-      },
-      function(stream) {
-      //Ø‚è‘Ö‚¦‚ÉƒJƒƒ‰‚ğ’â~‚·‚é‚½‚ßAî•ñ‚ğ•Û‘¶‚µ‚Ä‚¨‚­
-      localStream = stream;
-      $("#result_use").html( cameraData[cnt].id );
-      //ƒJƒƒ‰‚ğvideo‚ÉŒ‹‚Ñ‚Â‚¯‚é
-      video.src = window.URL.createObjectURL(stream);
-      },
-      function(err) {
-      //ƒGƒ‰[ˆ—
-      }
-      );
-      }
-      //ƒJƒƒ‰Ø‚è‘Ö‚¦ƒ{ƒ^ƒ“ƒNƒŠƒbƒNƒCƒxƒ“ƒg
-      $("#changeButton").bind("click",function(){
-      setCamera();
-      });
-      });
-    |   
+    script(src='javascripts/cameraSam.js')
+
     style(type='text/css').
       *{
       padding: 0;
@@ -140,5 +76,8 @@ html
     #result
     video#myVideo(autoplay='1')
     button#changeButton &#x30AB;&#x30E1;&#x30E9;&#x5207;&#x308A;&#x66FF;&#x3048;
+    canvas#c
+    input(type='button', value='copy frame', onclick='copyFrame()')
+
     h3 &#x4F7F;&#x7528;&#x30AB;&#x30E1;&#x30E9;ID
     #result_use
