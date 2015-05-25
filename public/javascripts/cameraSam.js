@@ -149,7 +149,7 @@ var context = $("canvas").get(0).getContext('2d');
 		});
 
 	//var deb=$('#debug');
-	document.getElementById('debug').innerHTML="spoiX"+spoiX+"spoiY"+spoiY+"ret"+ret;
+	document.getElementById('debug').innerHTML="spoiX"+spoiX+"spoiY"+spoiY+"ret"+ret+"spuit_color"+spuit_color;
 	
 	
     
