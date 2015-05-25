@@ -6,9 +6,9 @@ for(var i=0;i<avatar.length;i++) {
            avatar[0].checked=true;
     }  
 	
-myName=sessionStorage.getItem('myName');
-chatRoom=sessionStorage.getItem('toChat');	
-myAvatar=sessionStorage.getItem('myAvatar');
+var myName=sessionStorage.getItem('myName');
+var chatRoom=sessionStorage.getItem('toChat');	
+var myAvatar=sessionStorage.getItem('myAvatar');
 
 	
 if(myName!=""&&chatRoom!=""&&myAvatar!=""){
