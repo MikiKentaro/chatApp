@@ -92,7 +92,7 @@ var fromY;
 var offset=5;
 var cEle = document.getElementById('c');
 var context = cEle.getContext('2d');
-//var context = $("canvas").getContext('2d');
+//var context = $("canvas").get(0).getContext('2d');
 
 
 
@@ -135,11 +135,11 @@ var context = cEle.getContext('2d');
 	var spoiX = e.originalEvent.changedTouches[0].pageX; - $('canvas').offset().left - offset;
     var spoiY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
 	console.log(spoiY);
-    spuitImage = context.getImageData(spoiX, spoiY, 1, 1);
+    spuitImage = $("canvas").get(0).getContext('2d').getImageData(spoiX, spoiY, 1, 1);
     r = spuitImage.data[0];
     g = spuitImage.data[1];
     b = spuitImage.data[2];
-	
+	console.log(spuitImage);
     spuit_color = 'rgb(' + r +','+ g + ',' + b +')';
 	var ret = eval(spuit_color.replace(/rgb/,"((").replace(/,/ig,")*256+")).toString(16); 
 	ret="#" + (("000000" + ret).substring( 6 + ret.length - 6));
