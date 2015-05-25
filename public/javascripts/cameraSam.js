@@ -77,8 +77,8 @@
 
 
 
-    $('canvas').mousemove(function(e) {
-	
+//    $('canvas').mousemove(function(e) {
+	$('canvas').addEventListener( 'touchmove', function(e){
 	
 	//var getspuit = $('#spuit').is(':checked');
     //if(getspuit == true){
