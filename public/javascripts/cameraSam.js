@@ -82,7 +82,7 @@
     //cEle.width  = 300;   // canvasの幅と高さを、動画の幅と高さに合わせる
     //cEle.height = 300;
 
-    cCtx.drawImage(vEle, 0, 0);  // canvasに関数実行時の動画のフレームを描画
+    cCtx.drawImage(vEle, 0, 0,300,300);  // canvasに関数実行時の動画のフレームを描画
 }
 
    //document.body.mousedown(function(e) {
