@@ -97,19 +97,19 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	alert(vEle.videoWidth+"aa"+vEle.videoHeight)
 	var tate=300/aspect;
 
-    cEle.width  = 300;  // canvasの幅と高さを、動画の幅と高さに合わせる
-    cEle.height = tate;
+    //cEle.width  = 300;  // canvasの幅と高さを、動画の幅と高さに合わせる
+    //cEle.height = tate;
    
    
 	
-    var cCtx = cEle.get(0).getContext('2d');
+    var cCtx = cEle.getContext('2d');
 
 	
 	
 
     //cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight);  // canvasに関数実行時の動画のフレームを描画
 	
-   cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight,0,0,300,tate);  // canvasに関数実行時の動画のフレームを描画
+   cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight,0,0,300,400);  // canvasに関数実行時の動画のフレームを描画
 
 	
 	
