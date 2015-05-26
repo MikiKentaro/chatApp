@@ -106,9 +106,10 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	
 	
 
-    cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight);  // canvasに関数実行時の動画のフレームを描画
+    //cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight);  // canvasに関数実行時の動画のフレームを描画
 	
-	
+   cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight,0,0,300,tate);  // canvasに関数実行時の動画のフレームを描画
+
 	
 	
 	
@@ -174,7 +175,7 @@ var context = cEle.getContext('2d');
 	var spoiX = e.originalEvent.changedTouches[0].pageX; - $('canvas').offset().left - offset;
     var spoiY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
 	console.log(spoiY);
-    spuitImage = $("canvas").get(0).getContext('2d').getImageData(spoiX, spoiY, 1, 1);
+    spuitImage = $("canvas").getContext('2d').getImageData(spoiX, spoiY, 1, 1);
     r = spuitImage.data[0];
     g = spuitImage.data[1];
     b = spuitImage.data[2];
