@@ -79,8 +79,8 @@
     var cCtx = cEle.getContext('2d');
     var vEle = document.getElementById('myVideo');
 
-    cEle.width  = 300;   // canvasの幅と高さを、動画の幅と高さに合わせる
-    cEle.height = 300;
+    //cEle.width  = 300;   // canvasの幅と高さを、動画の幅と高さに合わせる
+    //cEle.height = 300;
 
     cCtx.drawImage(vEle, 0, 0);  // canvasに関数実行時の動画のフレームを描画
 }
