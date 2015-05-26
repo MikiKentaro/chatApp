@@ -109,7 +109,7 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 
     //cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight);  // canvasに関数実行時の動画のフレームを描画
 	
-   cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight,0,0,300,400);  // canvasに関数実行時の動画のフレームを描画
+   cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight);  // canvasに関数実行時の動画のフレームを描画
 
 	
 	
