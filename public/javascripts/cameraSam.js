@@ -1,6 +1,7 @@
 ﻿      $(function(){
 	  
 	  
+	  
 
 	  
 	  
@@ -88,9 +89,8 @@
 	  
 	  
 	  function copyFrame() {
-    var cEle = document.getElementById('c');
-    var cCtx = cEle.getContext('2d');
     var vEle = document.getElementById('myVideo');
+    var cEle = document.getElementById('c');
 
 
 var aspect=vEle.videoWidth/vEle.videoHeight;
@@ -110,7 +110,9 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 		});
 	*/
 	
-	
+	cEle = document.getElementById('c');
+    var cCtx = cEle.getContext('2d');
+
 	
 	
 
