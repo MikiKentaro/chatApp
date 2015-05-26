@@ -97,8 +97,8 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	alert(vEle.videoWidth+"aa"+vEle.videoHeight)
 	var tate=300/aspect;
 
-    cEle.width  = vEle.videoWidth;   // canvasの幅と高さを、動画の幅と高さに合わせる
-    cEle.height = vEle.videoHeight;
+    cEle.width  = 300;  // canvasの幅と高さを、動画の幅と高さに合わせる
+    cEle.height = tate;
     
 	
 	
@@ -175,7 +175,7 @@ var context = cEle.getContext('2d');
 	var spoiX = e.originalEvent.changedTouches[0].pageX; - $('canvas').offset().left - offset;
     var spoiY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
 	console.log(spoiY);
-    spuitImage = $("canvas").getContext('2d').getImageData(spoiX, spoiY, 1, 1);
+    spuitImage = $("canvas").get(0).getContext('2d').getImageData(spoiX, spoiY, 1, 1);
     r = spuitImage.data[0];
     g = spuitImage.data[1];
     b = spuitImage.data[2];
