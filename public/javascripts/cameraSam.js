@@ -100,6 +100,13 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
     //cEle.width  = 300;  // canvasの幅と高さを、動画の幅と高さに合わせる
     //cEle.height = 300;
     
+	$('#c').css({
+	width:"300px",
+	height:tate
+	
+	
+		
+		});
 	
 	
 	
@@ -108,7 +115,7 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 
     //cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight);  // canvasに関数実行時の動画のフレームを描画
 	
-   cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight,0,0,300,300);  // canvasに関数実行時の動画のフレームを描画
+   cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight,0,0,300,tate);  // canvasに関数実行時の動画のフレームを描画
 
 	
 	
