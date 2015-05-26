@@ -97,9 +97,10 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	alert(vEle.videoWidth+"aa"+vEle.videoHeight)
 	var tate=300/aspect;
 
-    //cEle.width  = 300;  // canvasの幅と高さを、動画の幅と高さに合わせる
-    //cEle.height = 300;
-    
+    cEle.width  = 300;  // canvasの幅と高さを、動画の幅と高さに合わせる
+    cEle.height = tate;
+   
+   /* 
 	$('#c').css({
 	width:"300px",
 	height:tate
@@ -107,7 +108,7 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	
 		
 		});
-	
+	*/
 	
 	
 	
