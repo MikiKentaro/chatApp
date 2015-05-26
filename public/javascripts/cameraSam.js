@@ -97,8 +97,8 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	alert(vEle.videoWidth+"aa"+vEle.videoHeight)
 	var tate=300/aspect;
 
-    cEle.width  = 300;  // canvasの幅と高さを、動画の幅と高さに合わせる
-    cEle.height = tate;
+    //cEle.width  = 300;  // canvasの幅と高さを、動画の幅と高さに合わせる
+    //cEle.height = 300;
     
 	
 	
@@ -108,7 +108,7 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 
     //cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight);  // canvasに関数実行時の動画のフレームを描画
 	
-   cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight,0,0,300,tate);  // canvasに関数実行時の動画のフレームを描画
+   cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight,0,0,300,300);  // canvasに関数実行時の動画のフレームを描画
 
 	
 	
@@ -138,7 +138,7 @@ var context = cEle.getContext('2d');
 
 
 
-	$('canvas').bind( 'touchstart', function(e){
+//	$('canvas').bind( 'touchstart', function(e){
 	//event.preventDefault();
 //alert("sssss");
 //fromX = e.pageX - $(this).offset().left - offset;
@@ -146,7 +146,7 @@ var context = cEle.getContext('2d');
 //        return false;  // for chrome
 //console.log(e.pageX);
 
-});
+//});
 
 
 
