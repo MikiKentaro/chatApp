@@ -99,6 +99,16 @@
 	var tate=300*aspect;
 
     cCtx.drawImage(vEle, 0, 0,300,tate);  // canvasに関数実行時の動画のフレームを描画
+	
+	$('#c').css({
+		"width": 300px;
+		"height":tate;
+		});
+	
+	
+	
+	
+	
 }
 
 
