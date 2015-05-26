@@ -84,7 +84,7 @@
     var aspect=vEle.videoWidth/vEle.videoHeight;
 	alert(vEle.videoWidth+"aa"+vEle.videoHeight)
 
-    cCtx.drawImage(vEle, 0, 0,300,300);  // canvasに関数実行時の動画のフレームを描画
+    cCtx.drawImage(vEle, 0, 0,300,300*aspect);  // canvasに関数実行時の動画のフレームを描画
 }
 
    //document.body.mousedown(function(e) {
