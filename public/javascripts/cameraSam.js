@@ -81,6 +81,8 @@
 
     //cEle.width  = 300;   // canvasの幅と高さを、動画の幅と高さに合わせる
     //cEle.height = 300;
+    var aspect=vEle.videoWidth/vEle.videoHeight;
+	alert(vEle.videoWidth+"aa"+vEle.videoHeight)
 
     cCtx.drawImage(vEle, 0, 0,300,300);  // canvasに関数実行時の動画のフレームを描画
 }
