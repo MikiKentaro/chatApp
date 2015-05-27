@@ -379,7 +379,7 @@ $('#camaraSwitch').click(function() {
 	   if ($('#c').css('display') == 'none') {
 	   
     // 表示されている場合の処理
-	alert("dfff")
+	//alert("dfff")
 } else {
     // 非表示の場合の処理
 }
@@ -510,8 +510,8 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	//alert(vEle.videoWidth+"aa"+vEle.videoHeight)
 	var tate=300/aspect;
 
-    //cEle.width  = 300;  // canvasの幅と高さを、動画の幅と高さに合わせる
-    //cEle.height = tate;
+    cEle.width  = vEle.videoWidth;  // canvasの幅と高さを、動画の幅と高さに合わせる
+    cEle.height = vEle.videoHeight;
    
    
 	
@@ -522,7 +522,7 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 
     //cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight);  // canvasに関数実行時の動画のフレームを描画
 	
-   cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight,0,0,300,150);  // canvasに関数実行時の動画のフレームを描画
+   cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight,0,0,vEle.videoWidth,vEle.videoHeight);  // canvasに関数実行時の動画のフレームを描画
 
 	cCtx.save();
 	
