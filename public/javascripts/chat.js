@@ -43,11 +43,23 @@ socket.on("sendPicker", function (picker) {
   //alert(picker.name+picker.chatname+picker.color);
   	         //socket.emit('realPicker', { name:myName, color:pickerColor, chatname:chatRoom });
 			 
-        //$("#popupColor").show();
+        $("#popupColor").show();
 		//document.getElementById('popupColor').style.backgroundColor = picker.color;
-		 
+		document.getElementById('popupColorText').innerHTML=picker.name+"さんから"+"<br>新しい色が送られてきました";
+  		document.getElementById('popupColorBox').style.backgroundColor = picker.color;
+		document.getElementById('popupColorBox').innerHTML = picker.color;
+
+
   
-  
+  $('#popupOKbutton').click(function() {
+  var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
+          myPicker.fromString(picker.color);  // now you can access API via 'myPicker' variable
+		  $("#popupColor").hide();
+});
+$('#popupNObutton').click(function() {
+  $("#popupColor").hide();
+});
+  /*
   var res = confirm(picker.name+"さんから"+picker.color+"が送られてきました");
       // 選択結果で分岐
       if( res == true ) {
@@ -58,9 +70,9 @@ socket.on("sendPicker", function (picker) {
       }
       else {
          // キャンセルならダイアログ表示
-        // $("#popupColor").hide();
+         //$("#popupColor").hide();
       }
-	  
+	 */ 
   
  
 
@@ -367,6 +379,12 @@ socket.emit('abc', {
 
 // サーバからメッセージ受信
     socket.on('send user', function (msg) {
+	
+	if($("#onlypaint").prop('checked')) { 
+	return;
+   }else{
+   }
+	
 	console.log("asss");
         context.strokeStyle = msg.color;
         context.lineWidth = 2;
@@ -467,7 +485,7 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
     });
  
     $('#clear2').click(function(e) {
-        socket.emit('clear send',{ chatname:chatRoom });
+        //socket.emit('clear send',{ chatname:chatRoom });
         e.preventDefault();
         context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
     });
@@ -491,13 +509,17 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
 		fromX = toX;
         fromY = toY;
     }
- /*
+ 
     $('#save2').click(function() {
-        var d = $("canvas")[0].toDataURL("image/png");
-        d = d.replace("image/png", "image/octet-stream");
-        window.open(d,"save");
+        //var d = $("canvas")[0].toDataURL("image/png");
+        //d = d.replace("image/png", "image/octet-stream");
+        //window.open(d,"save");
+		//CanvasElement canvas = document.getElementById('#canvasPC');
+        //String dataUrl = canvas.toDataUrl();
+		var can = document.getElementById("#canvasPC");
+Canvas2Image.saveAsPNG(can);    // PNG形式で保存
     });
-*/
+
 
 socket.on('connect',    function(){
 

@@ -65,11 +65,15 @@ block content
    li(style='background-color:#f0f')
    li(style='background-color:#0ff')
   #button2
-   input#save2(type='button', value='保存',style="cursor:pointer;")
-   input#clear2(type='button', value='消去',style="cursor:pointer;")
+   //input#save2(type='button', value='保存',style="cursor:pointer;")
+   input#clear2(type='button', value='クリア',style="cursor:pointer;")
 
   div スポイト
    input#spuit(type='radio', name='brush',style="cursor:pointer;")
+   
+  div １人でペイント
+   input#onlypaint(type='checkbox', name='brush',style="cursor:pointer;")
+
   
   //#nowcolor
   
@@ -78,7 +82,13 @@ block content
   //div#backimage
   // img(src='images/backimage.png', alt='サンプル',id='ava0' )
   
-  //div#popupColor
+  div#popupColor 
+   #popupColorText
+   #popupColorBox
+   br
+   button#popupOKbutton(type='button',style="cursor:pointer;WIDTH: 100px; HEIGHT: 20px; background-color:#88f;")  使う
+   &nbsp;&nbsp;
+   button#popupNObutton(type='button',style="cursor:pointer;WIDTH: 100px; HEIGHT: 20px;background-color:#f88;")　やめとく
 
 
   script(src='javascripts/jquery-2.0.0.min.js')
