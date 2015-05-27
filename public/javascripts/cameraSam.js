@@ -1,6 +1,18 @@
 ﻿      $(function(){
 	  
-	  
+	   $("#c").hide();
+	   
+	   
+	   if ($('#c').css('display') == 'none') {
+	   
+    // 表示されている場合の処理
+	alert("dfff")
+} else {
+    // 非表示の場合の処理
+}
+
+
+//$("#debug").animate({"top": "-=10px"}, "slow");
 	  
       //カメラの情報を取得
       var cameraData = [];
@@ -53,6 +65,7 @@
       localStream.stop();
 	  alert("aaasss");
 	  $("#myVideo").hide();
+	  $("#c").show();
 	  return;
       }else{};
       
@@ -61,6 +74,7 @@
 	  if( localStream ){
       localStream.stop();
 	  	  alert("bbbbss");
+		  $("#c").hide();
 		  $("#myVideo").show();
 
       }

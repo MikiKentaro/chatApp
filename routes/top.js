@@ -18,7 +18,7 @@ userAgent = req.headers['user-agent'].toLowerCase();
              || userAgent.indexOf("iphone") != -1
              || userAgent.indexOf("ipod") != -1){
         //res.render('top_m', {title: 'ライドロチャット-モバイル トップページ'});
-        res.render('cameraSample', {title: 'ライドロチャット-モバイル トップページ'});
+        res.render('top_m', {title: 'ライドロチャット-モバイル トップページ'});
 
     }
     else{
