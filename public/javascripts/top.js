@@ -26,8 +26,15 @@ for(var i=0;i<avatar.length;i++) {
 
 }	
 
+
 });
 
+$('#delPopup').click(function() {
+$("#popupTop").hide();
+
+
+
+});
 $('#send').click(function() {
 	
 });

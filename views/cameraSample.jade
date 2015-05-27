@@ -27,6 +27,7 @@ html
       font-weight: normal;
       margin-bottom: 5px;
       }
+      /*
       #result{
       font-size: 12px;;
       color: gray;
@@ -36,6 +37,7 @@ html
       text-align: left;
       margin-bottom: 13px;
       }
+      */
       #myVideo{
       width: 300px;
       box-shadow: 0 0 3px gray;
@@ -75,13 +77,15 @@ html
       background-color:#000000;
       }
   body
-    h2 &#x5185;&#x30AB;&#x30E1;&#x30E9;&#x30FB;&#x5916;&#x30AB;&#x30E1;&#x30E9;&#x5207;&#x308A;&#x66FF;&#x3048;&#x30C6;&#x30B9;&#x30C8;
-    h3 &#x30AB;&#x30E1;&#x30E9;&#x30FB;&#x30DE;&#x30A4;&#x30AF;&#x30EA;&#x30B9;&#x30C8;
+    h2 
+    h3 
     #result
     video#myVideo(autoplay='1')
     button#changeButton &#x30AB;&#x30E1;&#x30E9;&#x5207;&#x308A;&#x66FF;&#x3048;
     canvas#c(style="border: 5px solid #ccc;")
-    input(type='button', value='copy frame', onclick='copyFrame()')
+    input#copy(type='button', value='copy frame')
+    
+    input#see(type='button', value='ghhh')
     #nowcolor(style="background-color: #ff0000")
     #debug aa
 

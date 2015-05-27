@@ -2,24 +2,14 @@
 	  
 	  
 	  
-
-	  
-	  
-	  
-	  
-	  //$("canvas").bind("touchmove", touchHandler);
-	  //$("canvas").bind("touchstart", touchHandlerdown);
-
-
-	  
       //カメラの情報を取得
       var cameraData = [];
       MediaStreamTrack.getSources(function(data){
       //カメラ情報を取得して、出力する
-      var strCamera = "";
+      //var strCamera = "";
       var len = data.length;
       for( var i = 0 ; i < len ; i ++ ){
-      strCamera += "<p>種類："+ data[i].kind+"<br/>ID："+ data[i].id+"</p>";
+      //strCamera += "<p>種類："+ data[i].kind+"<br/>ID："+ data[i].id+"</p>";
       if( data[i].kind == "video" ){
       cameraData.push(data[i]);
       }
@@ -28,13 +18,21 @@
       alert("カメラが見つかりません");
       return;
       }
-      $("#result").html( strCamera );
+      //$("#result").html( strCamera );
       //カメラを取得・切り替える
       setCamera();
+	  
+	  
       });
+	  
+	  
+	  
       //カメラを取得・切り替える
       var cnt = 0;
       var localStream = null;
+	  
+	  
+	  
       function setCamera(){
       //カメラを順番に切り替える
       cnt++;
@@ -49,6 +47,30 @@
       if( localStream ){
       localStream.stop();
       }
+	  alert(canvasOn);
+	  if(canvasOn==true){
+	  if( localStream ){
+      localStream.stop();
+	  alert("aaasss");
+	  $("#myVideo").hide();
+	  return;
+      }else{};
+      
+	  
+      }else{
+	  if( localStream ){
+      localStream.stop();
+	  	  alert("bbbbss");
+		  $("#myVideo").show();
+
+      }
+	  
+	  
+	  }
+	  
+	  
+	  
+	  
       //カメラをIDを使用して取得する
       navigator.getUserMedia(
       {
@@ -73,20 +95,28 @@
       $("#changeButton").bind("click",function(){
       setCamera();
       });
+	  
+	  $("#copy").bind("click", function() {
+	          copyFrame();
+              setCamera();
+          });
+	  
+	   $("#see").bind("click", function() {
+	         canvasOn=false;
+              setCamera();
+          });
+	  
+	  
+	  
+	  
       });
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
+
+
+
+
+
+
+
 	  
 	  function copyFrame() {
     var vEle = document.getElementById('myVideo');
@@ -94,7 +124,7 @@
 
 
 var aspect=vEle.videoWidth/vEle.videoHeight;
-	alert(vEle.videoWidth+"aa"+vEle.videoHeight)
+	//alert(vEle.videoWidth+"aa"+vEle.videoHeight)
 	var tate=300/aspect;
 
     //cEle.width  = 300;  // canvasの幅と高さを、動画の幅と高さに合わせる
@@ -114,6 +144,8 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	cCtx.save();
 	
 	
+	canvasOn=true;
+	
 	
 	
 }
@@ -122,7 +154,7 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 
 
 
-
+var canvasOn=false;
 
 
 
@@ -172,8 +204,8 @@ var context = cEle.getContext('2d');
 	
 	//var getspuit = $('#spuit').is(':checked');
     //if(getspuit == true){
-	// if (drawFlag){
-	var spoiX = e.originalEvent.changedTouches[0].pageX; - $('canvas').offset().left - offset;
+	//if (drawFlag){
+	var spoiX = e.originalEvent.changedTouches[0].pageX - $('canvas').offset().left - offset;
     var spoiY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
 	console.log(spoiY);
     spuitImage = $("canvas").get(0).getContext('2d').getImageData(spoiX, spoiY, 1, 1);
