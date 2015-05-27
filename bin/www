@@ -162,6 +162,16 @@ io.sockets.in(socket.id).emit("rewriteMember", getMember(CHAT,NAME));
 	
   });
 
+socket.on('realPicker', function (picker) {
+ 
+        // Ž©•ªˆÈŠO‚Ì‘Sˆõ‚É‘—‚é
+        socket.broadcast.in(picker.chatname).emit('sendPicker', picker);
+		console.log("sendPicker")
+    });
+
+
+
+
 
 
 

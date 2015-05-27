@@ -36,6 +36,36 @@ var socket = io();
 socket.on("rewriteMember", function (allMemberName) {
                 $("#chatAvatarOther").html(allMemberName);
             });
+			
+			
+socket.on("sendPicker", function (picker) {
+  //$("#chatAvatarOther").html(allMemberName);
+  //alert(picker.name+picker.chatname+picker.color);
+  	         //socket.emit('realPicker', { name:myName, color:pickerColor, chatname:chatRoom });
+			 
+        //$("#popupColor").show();
+		//document.getElementById('popupColor').style.backgroundColor = picker.color;
+		 
+  
+  
+  var res = confirm(picker.name+"さんから"+picker.color+"が送られてきました");
+      // 選択結果で分岐
+      if( res == true ) {
+         // OKなら移動
+		  var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
+          myPicker.fromString(picker.color);  // now you can access API via 'myPicker' variable
+         //$("#popupColor").hide();
+      }
+      else {
+         // キャンセルならダイアログ表示
+        // $("#popupColor").hide();
+      }
+	  
+  
+ 
+
+
+});
 
 
 socket.on('delMemName', function(delMemName) {

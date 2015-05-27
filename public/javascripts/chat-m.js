@@ -359,7 +359,7 @@ $.post('/data/chat', {newMemRoomName: chatRoom,newMemName: myName}, function(res
 
 
 
-
+var pickerColor="#ffffff";
 
 var canvasOn=false;
 
@@ -372,16 +372,21 @@ var context = cEle.getContext('2d');
 
 $('#camaraSwitch').click(function() {
     
-	$("#cameraSpace").show();
-	 $("#c").hide();
+	//$("#cameraSpace").show();
+	 //$("#c").hide();
 	   
 	   
-	   if ($('#c').css('display') == 'none') {
+	   if ($('#cameraSpace').css('display') != 'none') {
 	   
     // 表示されている場合の処理
-	//alert("dfff")
+	$("#cameraSpace").hide();
+	return;
+
+
 } else {
     // 非表示の場合の処理
+		$("#cameraSpace").show();
+	
 }
 
 
@@ -480,23 +485,34 @@ $('#camaraSwitch').click(function() {
       }
       //カメラ切り替えボタンクリックイベント
       $("#changeButton").bind("click",function(){
+	  canvasOn=false;
       setCamera();
       });
 	  
-	  $("#copy").bind("click", function() {
+	  $("#chaptya").bind("click", function() {
 	          copyFrame();
               setCamera();
           });
 	  
-	   $("#see").bind("click", function() {
-	         canvasOn=false;
-              setCamera();
+	   $("#sendColor").bind("click", function() {
+	         //canvasOn=false;
+			 alert("送信しました。");
+             sendcolor();
+              //setCamera();
+			 
+			  
           });
 	  
 	  
 	  
 	
 });
+
+function sendcolor(){
+			 
+	         socket.emit('realPicker', { name:myName, color:pickerColor, chatname:chatRoom });
+
+}
 
 
 
@@ -567,15 +583,16 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	context.strokeStyle=ret;
 	console.log(ret)
 
-	$('#nowcolor').css({
-		"background-color": ret
-		});
 
+	document.getElementById('nowcolor').style.backgroundColor = ret;
+	
+
+    document.getElementById('nowcolor').innerHTML=ret;
 	//var deb=$('#debug');
 	document.getElementById('debug').innerHTML="spoiX"+spoiX+"spoiY"+spoiY+"ret"+ret+"spuit_color"+spuit_color;
 	
 	
-    
+    pickerColor=ret;
 	
         
 	
