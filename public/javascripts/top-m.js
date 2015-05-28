@@ -34,8 +34,8 @@ $('#send').click(function() {
 
 $('#plusChatButton_m').click(function() {
 
-	  document.getElementById("plusChat").innerHTML = '<input type="text" size="25" id="newchat" placeholder="新しいチャット名を入力してください">'+
-	  '<button id="NewChatButton" type="button">作成</button>';
+	  document.getElementById("plusChat").innerHTML = '<input type="text" size="25" id="newchat" placeholder="新しいチャット名を入力してください"style="font-size:40px;">'+
+	  '<button id="NewChatButton" type="button"style="font-size:40px;">作成</button>';
 	  
 $('#NewChatButton').click(function() {
 
@@ -47,8 +47,8 @@ postList2();
 
 $('#serch_m').click(function() {
 
-	  document.getElementById("topMesse").innerHTML = '<input type="text" size="25" id="serchForm" placeholder="検索ワードを入力してください">'+
-	  '<button id="serchButton" type="button">検索</button>';
+	  document.getElementById("topMesse").innerHTML = '<input type="text" size="25" id="serchForm" placeholder="検索ワードを入力してください"style="font-size:40px;">'+
+	  '<button id="serchButton" type="button"style="font-size:40px;">検索</button>';
 	  
 $('#serchButton').click(function() {
 
@@ -133,11 +133,7 @@ var avatarNum="1";
 
 var newChatName=$('#newchat').val();
 
-if(newChatName==""||newChatName.length>=11){
- 
-alert("1文字以上10文字以内で入力してください");
-return;
-}
+
 		//alert("dd");
     //入力項目を空にする
     // /todoにPOSTアクセスする
@@ -162,6 +158,13 @@ function postList2() {
 var newChatName=$('#newchat').val();
 	    $('#newchat').val('');
     //入力項目を空にする
+	
+	
+	if(newChatName==""||newChatName.length>=11){
+ 
+alert("1文字以上10文字以内で入力してください");
+return;
+}
     // /todoにPOSTアクセスする
     $.post('/data/chatprof', {NewChatName: newChatName}, function(res) {
 
@@ -194,12 +197,12 @@ for(var i=0;i<avatar.length;i++) {
 
 if(profname==""||profname.length>=11){
  
-alert("1文字以上10文字以内で入力してください");
+alert("名前を1文字以上10文字以内で入力してください");
 return;
 }
 
 if(profname.indexOf(">") != -1||profname.indexOf("<") != -1||profname.indexOf("&") != -1){
-alert("<>&の使用は控えてください");
+alert("名前に<>&の使用は控えてください");
 return;
 
 
@@ -233,10 +236,16 @@ window.location.href = "/chat";
 
 function serchList(){
 
-
+var num=0;
 var serchWord= $('#serchForm').val();
 
 $('#serchForm').val='';
+
+if(serchWord.length>=11){
+ 
+alert("10文字以内で入力してください");
+//return;
+}
 
 var $roomlist = $('.roomlist');
         $roomlist.fadeOut(function() {
@@ -248,7 +257,7 @@ var $roomlist = $('.roomlist');
 				
 					if(Chatprof.chatname.indexOf(serchWord) != -1){
 
-   					 $roomlist.append('<div class="roomname_m" name="'+Chatprof.chatname+'">' + Chatprof.chatname+'</div>');
+   					 //$roomlist.append('<div class="roomname_m" name="'+Chatprof.chatname+'">' + Chatprof.chatname+'</div>');
 
 
                      var EStext =escapeHTML(Chatprof.chatname);
@@ -259,10 +268,18 @@ var $roomlist = $('.roomlist');
 
                      $roomlist.append(unescape(htmltext));
 
-
+num+=1;
 }
 
                 });
+				
+				if(num==0){
+				document.getElementById("serchResult").innerHTML=serchWord+"で検索した結果、見つかりませんでした。"
+
+				
+				}else{
+　　　　　　　　document.getElementById("serchResult").innerHTML=serchWord+"で検索した結果、"+num+"件見つかりました"
+                }
                 // 一覧を表示する
                 $roomlist.fadeIn();
 				

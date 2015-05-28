@@ -175,8 +175,7 @@ var canvasOn=false;
 
    //document.body.mousedown(function(e) {
 
-var fromX;
-var fromY;
+
 var offset=5;
 var cEle = document.getElementById('c');
 var context = cEle.getContext('2d');

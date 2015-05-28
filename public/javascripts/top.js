@@ -109,9 +109,12 @@ function getList() {
    					 var htmltext='<div class="roomname" name="'+EStext+'">' + EStext+'</div>';
 
                      $roomlist.append(unescape(htmltext));
+					 
+					 num+=1;
 
                     
                 });
+				
                 // 一覧を表示する
                 $roomlist.fadeIn();
 				
@@ -204,12 +207,12 @@ for(var i=0;i<avatar.length;i++) {
 		
 		if(profname==""||profname.length>=11){
  
-alert("1文字以上10文字以内で入力してください");
+alert("名前を1文字以上10文字以内で入力してください");
 return;
 }
 
 if(profname.indexOf(">") != -1||profname.indexOf("<") != -1||profname.indexOf("&") != -1){
-alert("<>&の使用は控えてください");
+alert("名前に<>&の使用は控えてください");
 return;
 
 
@@ -247,13 +250,13 @@ var serchWord= $('#serchForm').val();
 
 $('#serchForm').val='';
 
-if(serchWord==""||serchWord.length>=11){
+if(serchWord.length>=11){
  
-alert("1文字以上10文字以内で入力してください");
-return;
+alert("10文字以内で入力してください");
+//return;
 }
 
-
+var num=0;
 var $roomlist = $('.roomlist');
         $roomlist.fadeOut(function() {
 		
@@ -271,15 +274,21 @@ var $roomlist = $('.roomlist');
    					 var htmltext='<div class="roomname" name="'+EStext+'">' + EStext+'</div>';
 
                      $roomlist.append(unescape(htmltext));
-   					 //$roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'   ' +Chatprof.chatCount+'人</a></div>');
-
-					 //$roomlist.append('<div class="roomname" name="'+Chatprof.chatname+'"><a href=/chat>' + Chatprof.chatname +'   ' +Chatprof.chatCount+'人</a></div>');
-
+num+=1;
 
 
 }
 
                 });
+				
+				
+				if(num==0){
+				document.getElementById("serchResult").innerHTML=serchWord+"で検索した結果、見つかりませんでした。"
+
+				
+				}else{
+　　　　　　　　document.getElementById("serchResult").innerHTML=serchWord+"で検索した結果、"+num+"件見つかりました"
+}
                 // 一覧を表示する
                 $roomlist.fadeIn();
 				

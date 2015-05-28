@@ -5,13 +5,6 @@ firstView();
 	
 socket.emit('startadd', 'abc');
 
-//alert($("#jscolor").val());
-
-//$("#jscolor").val("#00ff00");	
-//$("#jscolor").color.fromString('F2C80A')
-//var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
-//myPicker.fromString('#99FF33')  // now you can access API via 'myPicker' variable
-
 $("#cameraSpace").hide();
 
 
@@ -437,11 +430,11 @@ $('#camaraSwitch').click(function() {
       if( localStream ){
       localStream.stop();
       }
-	  alert(canvasOn);
+	  //alert(canvasOn);
 	  if(canvasOn==true){
 	  if( localStream ){
       localStream.stop();
-	  alert("aaasss");
+	  //alert("aaasss");
 	  $("#myVideo").hide();
 	  $("#c").show();
 	  return;
@@ -451,7 +444,7 @@ $('#camaraSwitch').click(function() {
       }else{
 	  if( localStream ){
       localStream.stop();
-	  	  alert("bbbbss");
+	  	  //alert("bbbbss");
 		  $("#c").hide();
 		  $("#myVideo").show();
 

@@ -42,6 +42,7 @@ position:absolute;
 bottom:50px;
     right:30px;
 text-align: right;
+
 }
 
 .hukidasi{
@@ -261,6 +262,14 @@ box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
 
 
 }
+#serchResult{
+
+padding:10px;
+color:#990000;
+
+
+
+}
 
 
 
@@ -360,6 +369,7 @@ background-color:#000000;
   background-color:#ffffff;
 text-align: center;
   font: 35px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size:40px;
 
 }
 #topAvatar_m{
