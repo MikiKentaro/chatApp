@@ -116,8 +116,8 @@ app.get('/data/chatprof', function(req, res) {
 	
   });
   
-   Chatprof.remove({} , function(err, prof) {
-  });
+   //Chatprof.remove({} , function(err, prof) {
+  //});
 });
 
 app.get('/data/prof', function(req, res) {
