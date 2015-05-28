@@ -1,29 +1,37 @@
 ﻿$(function() {
     getList();
-	
+
+//最初のラジオボタンを一つ目にする
 var avatar = document.getElementsByName("avatar"); 
 for(var i=0;i<avatar.length;i++) {   
            avatar[0].checked=true;
     }  
-	
+
+
+
+//セッションあったら	
+if(sessionStorage.length!=0){
+
+//セッション読み込む
 myName=sessionStorage.getItem('myName');
 chatRoom=sessionStorage.getItem('toChat');	
 myAvatar=sessionStorage.getItem('myAvatar');
 
-	
-if(myName!=""&&chatRoom!=""&&myAvatar!=""){
 $.post('/data/prof', {BeChatroom:chatRoom,BeMyname:myName}, function(res) {
 	
        
    });
+//フォームに名前を表示
 var nameform = $('#name');
 nameform.val(myName);
+//アバターを元々のものに
 for(var i=0;i<avatar.length;i++) {   
            avatar[myAvatar].checked=true;
     }  
-}else{
-//alert("aa")
+//$('#popupTop').show();
 
+}else{
+$('#popupTop').show();
 }	
 
 
@@ -198,7 +206,6 @@ for(var i=0;i<avatar.length;i++) {
 		   avatarNum=i;
 		   }
     }  
-//alert(avatarNum);
 //アバター番号　ここまで
    
     var profname = $('#name').val();
@@ -253,7 +260,7 @@ $('#serchForm').val='';
 if(serchWord.length>=11){
  
 alert("10文字以内で入力してください");
-//return;
+return;
 }
 
 var num=0;
@@ -297,7 +304,6 @@ num+=1;
 				
 				postChatIn(roomname);
 				
-                //alert(roomname);
                 });
 				
 				
@@ -313,17 +319,3 @@ num+=1;
 	
 	
 	
-	/*
-					var EStext =escapeHTML(Chat.chatText);
-				
-					 var htmltext='<table id="chatTable"><td><div class="chattext">' + EStext + '</div></td>'+
-					 '<td><div>'+hour+':'+min+'</div><div> ' + Chat.sender + '</div></td></table>';
-			
-                       
-						
-						$list.append(unescape(htmltext));
-
-	
-	
-	
-	*/

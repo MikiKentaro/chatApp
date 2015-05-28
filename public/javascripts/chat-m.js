@@ -1,7 +1,6 @@
-﻿
-$(function() {
+﻿$(function() {
 firstView();
-    //getList();
+
 	
 socket.emit('startadd', 'abc');
 
@@ -24,10 +23,9 @@ var myID;
 
 var socket = io();
 
-
 socket.on("rewriteMember", function (allMemberName) {
-                $("#chatAvatarOther_m").html(allMemberName);
-            });
+$("#chatAvatarOther_m").html(allMemberName);
+});
 
 
 socket.on('delMemName', function(delMemName) {
@@ -49,9 +47,7 @@ socket.on('abc', function(abc) {
 socket.on('chat', function(chat) {
 
   if(chat.message==""||chat.message.length>=101){
- 
-//alert("1文字以上100文字以内で入力してください");
-return;
+ return;
 }
   
   
@@ -73,10 +69,7 @@ var EStext =escapeHTML(chat.message);
   var oldChat = hukidasi.innerHTML;
   hukidasi.innerHTML = oldChat +newChat;
   
-  
-
-  //avatarOther();
-
+ 
   getList();
 });
 
@@ -136,26 +129,13 @@ function getList() {
 				
 				if (min < 10) min = "0" + min;
 				
-				
-				//var EStext=escape(Chat.chatText);
-				var EStext =escapeHTML(Chat.chatText);
-				//console.log("escape:"+EStext);
-				
-				
-				//console.log(EStext);
-				//EStext=text(EStext);
-			         //$list.append('<table id=chatTable><td><div class="chattext">' + Chat.chatText + '</div></td>'+
-					 //'<td><div>'+hour+':'+min+'</div><div> ' + Chat.sender + '</div></td></table>');
+				　var EStext =escapeHTML(Chat.chatText);
 
 					 var htmltext='<table id="chatTable"><td><div class="chattext_m">' + EStext + '</div></td>'+
 					 '<td><div>'+hour+':'+min+'</div><div> ' + Chat.sender + '</div></td></table>';
 			
                         num += 1;
 						
-						
-						//console.log(htmltext);
-						//htmltext=unescape(htmltext);
-						//console.log(htmltext);
 						$list.append(unescape(htmltext));
 		
                     }
@@ -202,12 +182,8 @@ return;
     //入力項目を空にする
     // /todoにPOSTアクセスする
     $.post('/data/chat', {chatText: chattext,senderName:sendername,chatroom:chatroom}, function(res) {
-	
-        //console.log(res);
-        //再度表示する
        
     });
- //getList();
 	
 }
 
@@ -222,7 +198,7 @@ chatRoom=sessionStorage.getItem('toChat');
 var $avatarMe = $('#chatAvatarMe_m');
 
 
-	  document.getElementById("chatAvatarMe_m").innerHTML = '<div id="'+myName+'"><div>'+myName+'</div><img src="images/avatar'+myAvatar+'.png" alt="サンプル"></div>';	
+document.getElementById("chatAvatarMe_m").innerHTML = '<div id="'+myName+'"><div>'+myName+'</div><img src="images/avatar'+myAvatar+'.png" alt="サンプル"></div>';	
 
 
 var ESchatRoom =escapeHTML(chatRoom);
@@ -232,11 +208,6 @@ var ESchatRoom =escapeHTML(chatRoom);
 
 $chatName.append(unescape('<div style="font-size:15px;">チャット名'+'</div>'+ESchatRoom));
 $chatName.fadeIn();
-
-
-// var $chatName = $('#chatName_m');
-//$chatName.append('<div style="font-size:15px;">チャット名'+'</div>'+chatRoom);
-//$chatName.fadeIn();
 
 
  socket.emit('visitChat', {
@@ -262,24 +233,11 @@ avatarOther();
 });	
 
    
-
- 
- //avatarOther();
- //getList();
-
- 
  
 });
 
 
-
-
  socket.on('start', function(start) {
-
-
-   //avatarOther();
-//getList();
-
  
 });
 
@@ -296,7 +254,6 @@ socket.emit('abc', {
 	avatar:myAvatar
   });
 	
-//getList();
 		
 }
 
@@ -315,43 +272,19 @@ socket.emit('abc', {
 
 
 
-
-
-
-
-
-
-
-
-
-
-	
-
-
+//カメラキャプチャ部分
 
 socket.on('connect',    function(){
-
-
 console.log('connect');
 
 $.post('/data/chat', {newMemRoomName: chatRoom,newMemName: myName}, function(res) {
 
 
 });	
-//getList();
-//avatarOther();
 });
 
 
-
-
-
-
-
-
-
-
-
+//デフォルトカラー
 var pickerColor="#ffffff";
 
 var canvasOn=false;
@@ -362,19 +295,15 @@ var cEle = document.getElementById('c');
 var context = cEle.getContext('2d');
 
 
-
+//カメラスイッチを押したとき
 $('#camaraSwitch').click(function() {
-    
-	//$("#cameraSpace").show();
-	 //$("#c").hide();
 	   
-	   
-	   if ($('#cameraSpace').css('display') != 'none') {
+　
+　　if ($('#cameraSpace').css('display') != 'none') {
 	   
     // 表示されている場合の処理
 	$("#cameraSpace").hide();
 	return;
-
 
 } else {
     // 非表示の場合の処理
@@ -383,13 +312,11 @@ $('#camaraSwitch').click(function() {
 }
 
 
-//$("#debug").animate({"top": "-=10px"}, "slow");
 	  
       //カメラの情報を取得
       var cameraData = [];
       MediaStreamTrack.getSources(function(data){
       //カメラ情報を取得して、出力する
-      //var strCamera = "";
       var len = data.length;
       for( var i = 0 ; i < len ; i ++ ){
       //strCamera += "<p>種類："+ data[i].kind+"<br/>ID："+ data[i].id+"</p>";
@@ -401,7 +328,6 @@ $('#camaraSwitch').click(function() {
       alert("カメラが見つかりません");
       return;
       }
-      //$("#result").html( strCamera );
       //カメラを取得・切り替える
       setCamera();
 	  
@@ -434,7 +360,6 @@ $('#camaraSwitch').click(function() {
 	  if(canvasOn==true){
 	  if( localStream ){
       localStream.stop();
-	  //alert("aaasss");
 	  $("#myVideo").hide();
 	  $("#c").show();
 	  return;
@@ -444,7 +369,6 @@ $('#camaraSwitch').click(function() {
       }else{
 	  if( localStream ){
       localStream.stop();
-	  	  //alert("bbbbss");
 		  $("#c").hide();
 		  $("#myVideo").show();
 
@@ -452,9 +376,6 @@ $('#camaraSwitch').click(function() {
 	  
 	  
 	  }
-	  
-	  
-	  
 	  
       //カメラをIDを使用して取得する
       navigator.getUserMedia(
@@ -478,19 +399,23 @@ $('#camaraSwitch').click(function() {
       }
       //カメラ切り替えボタンクリックイベント
       $("#changeButton").bind("click",function(){
+	  document.getElementById('changeButton').innerHTML="カメラ切り替え"
+
 	  canvasOn=false;
       setCamera();
       });
 	  
 	  $("#chaptya").bind("click", function() {
+	  document.getElementById('changeButton').innerHTML="カメラON"
 	          copyFrame();
               setCamera();
           });
 	  
 	   $("#sendColor").bind("click", function() {
 	         //canvasOn=false;
-			 alert("送信しました。");
              sendcolor();
+			 alert("送信しました。");
+
               //setCamera();
 			 
 			  
@@ -500,40 +425,29 @@ $('#camaraSwitch').click(function() {
 	  
 	
 });
-
+//
 function sendcolor(){
 			 
-	         socket.emit('realPicker', { name:myName, color:pickerColor, chatname:chatRoom });
+socket.emit('realPicker', { name:myName, color:pickerColor, chatname:chatRoom });
 
 }
 
 
 
-	  
+	  //ビデオの内容をキャンバスに移す
 	  function copyFrame() {
     var vEle = document.getElementById('myVideo');
     var cEle = document.getElementById('c');
 
 
 var aspect=vEle.videoWidth/vEle.videoHeight;
-	//alert(vEle.videoWidth+"aa"+vEle.videoHeight)
 	var tate=300/aspect;
 
     //cEle.width  = vEle.videoWidth;  // canvasの幅と高さを、動画の幅と高さに合わせる
     //cEle.height = vEle.videoHeight;
-   
-   
 	
     var cCtx = cEle.getContext('2d');
 	
-	
-	//var w=cCtx.canvas.width;
-	//var h=cCtx.canvas.height;
-
-	
-	
-
-    //cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight);  // canvasに関数実行時の動画のフレームを描画
 	
    cCtx.drawImage(vEle, 0, 0,vEle.videoWidth,vEle.videoHeight,0,0,300,150);  // canvasに関数実行時の動画のフレームを描画
 
@@ -546,22 +460,13 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	
 }
 
-
-
-
-
-
-
-
+//キャンバス部分のスポイトツール
 	$('canvas').bind( 'touchmove', function(e){
 	
 	
 	
 	e.preventDefault();
 	
-	//var getspuit = $('#spuit').is(':checked');
-    //if(getspuit == true){
-	//if (drawFlag){
 	var spoiX = e.originalEvent.changedTouches[0].pageX - $('canvas').offset().left - offset;
     var spoiY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
 	console.log(spoiY);
@@ -581,7 +486,6 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	
 
     document.getElementById('nowcolor').innerHTML=ret;
-	//var deb=$('#debug');
 	document.getElementById('debug').innerHTML="spoiX"+spoiX+"spoiY"+spoiY+"ret"+ret+"spuit_color"+spuit_color;
 	
 	

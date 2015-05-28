@@ -1,16 +1,9 @@
-﻿
+﻿//読み込み時
 $(function() {
 firstView();
-    //getList();
 	
 socket.emit('startadd', 'abc');
 
-//alert($("#jscolor").val());
-
-//$("#jscolor").val("#00ff00");	
-//$("#jscolor").color.fromString('F2C80A')
-//var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
-//myPicker.fromString('#99FF33')  // now you can access API via 'myPicker' variable
 });
 
 
@@ -32,59 +25,37 @@ var context = $("canvas").get(0).getContext('2d');
 
 var socket = io();
 
-
+//チャット内の人数が変わった時　アバターの表示部分
 socket.on("rewriteMember", function (allMemberName) {
                 $("#chatAvatarOther").html(allMemberName);
             });
 			
-			
+//スマホから新しい色が送られてきたとき		
 socket.on("sendPicker", function (picker) {
-  //$("#chatAvatarOther").html(allMemberName);
-  //alert(picker.name+picker.chatname+picker.color);
-  	         //socket.emit('realPicker', { name:myName, color:pickerColor, chatname:chatRoom });
 			 
-        $("#popupColor").show();
-		//document.getElementById('popupColor').style.backgroundColor = picker.color;
-		document.getElementById('popupColorText').innerHTML=picker.name+"さんから"+"<br>新しい色が送られてきました";
-  		document.getElementById('popupColorBox').style.backgroundColor = picker.color;
-		document.getElementById('popupColorBox').innerHTML = picker.color;
+　$("#popupColor").show();
+  　document.getElementById('popupColorText').innerHTML=picker.name+"さんから"+"<br>新しい色が送られてきました";
+  　document.getElementById('popupColorBox').style.backgroundColor = picker.color;
+  　document.getElementById('popupColorBox').innerHTML = picker.color;
 
 
-  
-  $('#popupOKbutton').click(function() {
-  var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
-          myPicker.fromString(picker.color);  // now you can access API via 'myPicker' variable
-		  $("#popupColor").hide();
+  //ポップアップのOKを押したとき
+　$('#popupOKbutton').click(function() {
+  　var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
+    myPicker.fromString(picker.color);  // now you can access API via 'myPicker' variable
+	$("#popupColor").hide();
 });
+//NOを押したとき
 $('#popupNObutton').click(function() {
-  $("#popupColor").hide();
+  　$("#popupColor").hide();
 });
-  /*
-  var res = confirm(picker.name+"さんから"+picker.color+"が送られてきました");
-      // 選択結果で分岐
-      if( res == true ) {
-         // OKなら移動
-		  var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
-          myPicker.fromString(picker.color);  // now you can access API via 'myPicker' variable
-         //$("#popupColor").hide();
-      }
-      else {
-         // キャンセルならダイアログ表示
-         //$("#popupColor").hide();
-      }
-	 */ 
   
- 
-
-
 });
 
-
+//人数が変わった時　
 socket.on('delMemName', function(delMemName) {
 
 
-
-//getList();
 avatarOther();
 getList();
 
@@ -96,38 +67,29 @@ socket.on('abc', function(abc) {
 
 });
 // chatというイベントを受信したらHTML要素に追加する
+//吹き出し部分の表示
 socket.on('chat', function(chat) {
 
-  
-  
+
   if(chat.message==""||chat.message.length>=101){
  
 //alert("1文字以上100文字以内で入力してください");
-return;
-}
+　　return;
+　　}
 
   
   var abbb;
   abbb=chat.name;
-var avatarOffset=$('#'+abbb).offset();
-
-
-var leftpos=avatarOffset.left;
-
-var EStext =escapeHTML(chat.message);
-
+　var avatarOffset=$('#'+abbb).offset();
+　var leftpos=avatarOffset.left;
   
+　var EStext =escapeHTML(chat.message);
   var hukidasi = document.getElementById('hukidasiList');
   var newChat = '<div class="hukiMesse" style="position:relative; left: '+leftpos+'px;">' + EStext + '</div>';
-
-
-
   var oldChat = hukidasi.innerHTML;
   hukidasi.innerHTML = oldChat +newChat;
   
-  
 
-  //avatarOther();
 
   getList();
 });
@@ -146,10 +108,9 @@ $('#send').click(function() {
 // メッセージを送信する
 function sendMessage() {
 
+
 var name =myName;
-
 var message = $('#text').val();
-
 var id =myID;
 
 
@@ -180,61 +141,47 @@ function getList() {
                 $.each(chats, function(index, Chat) {
                     //タイトルにすTodoを表示
 					
-					
-					if(Chat.chatname==chatRoom){
-				var time = new Date(Chat.createdDate);
-            var hour = time.getHours(); // 時
-            var min = time.getMinutes(); // 分
 				
-				if (min < 10) min = "0" + min;
+				if(Chat.chatname==chatRoom){
+				　var time = new Date(Chat.createdDate);
+           　　 　var hour = time.getHours(); // 時
+            　　　var min = time.getMinutes(); // 分
 				
+				　//ミニッツも部分が一ケタの時、０を加える
+				　if (min < 10) min = "0" + min;
 				
-				//var EStext=escape(Chat.chatText);
-				var EStext =escapeHTML(Chat.chatText);
-				//console.log("escape:"+EStext);
-				
-				
-				//console.log(EStext);
-				//EStext=text(EStext);
-			         //$list.append('<table id=chatTable><td><div class="chattext">' + Chat.chatText + '</div></td>'+
-					 //'<td><div>'+hour+':'+min+'</div><div> ' + Chat.sender + '</div></td></table>');
-
-					 var htmltext='<table id="chatTable"><td><div class="chattext">' + EStext + '</div></td>'+
-					 '<td><div>'+hour+':'+min+'</div><div> ' + Chat.sender + '</div></td></table>';
+　　　　　　　　　　　var EStext =escapeHTML(Chat.chatText);
+　　　　　　　　　　　var htmltext='<table id="chatTable"><td><div class="chattext">' + EStext + '</div></td>'+
+　　　　　　　　　　　 '<td><div>'+hour+':'+min+'</div><div> ' + Chat.sender + '</div></td></table>';
 			
-                        num += 1;
-						
-						
-						//console.log(htmltext);
-						//htmltext=unescape(htmltext);
-						//console.log(htmltext);
-						$list.append(unescape(htmltext));
+                       num += 1;
+　　　　　　　　　　　 $list.append(unescape(htmltext));
 		
-                    }
+                  }
                 });
-                // 一覧を表示する
-			    
+                
+				// 一覧を表示する
                 $list.fadeIn();
 				
             });
         });
 		
-			var pos = $(".hukidasi");
+var pos = $(".hukidasi");
 var position = pos.position();
 
 
     }
-	
-	function escapeHTML(val) {
+//HTMLタグのエスケープ
+function escapeHTML(val) {
         return $('<div>').text(val).html();
-    };
-	
-	function unescapeHTML(val) {
+};
+//HTMLタグのアンエスケープ	
+function unescapeHTML(val) {
         return $('<div>').html(val).text();
-    };
+};
 	
 	
-	
+//投稿の内容をmongodbに保存する	
 function postList() {
     // フォームに入力された値を取得
     var chattext = $('#text').val();
@@ -242,13 +189,13 @@ function postList() {
 	var chatroom=chatRoom;
 
 	
-	    $('#text').val('');
-	
-if(chattext==""||chattext.length>=101){
+	$('#text').val('');
+	//入力チェック
+　　if(chattext==""||chattext.length>=101){
  
-alert("1文字以上100文字以内で入力してください");
-return;
-}
+　　　alert("1文字以上100文字以内で入力してください");
+　　　return;
+　　　}
 	
     //入力項目を空にする
     // /todoにPOSTアクセスする
@@ -260,37 +207,24 @@ return;
     });
 	
 }
-
+//読み込み時にアバターや部屋の名前を表示する
 function firstView(){
 
+//セッションから読み込む
+　myAvatar=sessionStorage.getItem('myAvatar');
+　myName=sessionStorage.getItem('myName');
+　chatRoom=sessionStorage.getItem('toChat');
+//自分のアバター表示
+　var $avatarMe = $('#chatAvatarMe');
+　document.getElementById("chatAvatarMe").innerHTML = '<div id="'+myName+'"><div>'+myName+'</div><img src="images/avatar'+myAvatar+'.png" alt="サンプル"></div>';	
 
-myAvatar=sessionStorage.getItem('myAvatar');
-myName=sessionStorage.getItem('myName');
-
-chatRoom=sessionStorage.getItem('toChat');
-
-var $avatarMe = $('#chatAvatarMe');
-
-
-	  document.getElementById("chatAvatarMe").innerHTML = '<div id="'+myName+'"><div>'+myName+'</div><img src="images/avatar'+myAvatar+'.png" alt="サンプル"></div>';	
-
-
+//チャット名表示
 var ESchatRoom =escapeHTML(chatRoom);
-					 
-					 
-
-   					 //var htmltext='<div class="roomname" name="'+EStext+'">' + EStext+'</div>';
-
-                     //$roomlist.append(unescape(htmltext));
-
-
- var $chatName = $('#chatName');
-
-
+var $chatName = $('#chatName');
 $chatName.append(unescape('<div style="font-size:15px;">チャット名'+'</div>'+ESchatRoom));
 $chatName.fadeIn();
 
-
+//訪れたことをみんなに報告
  socket.emit('visitChat', {
     name:myName,
     chatname:chatRoom,
@@ -298,47 +232,35 @@ $chatName.fadeIn();
   });
 
 
-
+//他のアバター表示
 avatarOther();
 
 }
 
 
 //接続が切れた時
-  socket.on('fin', function(fin) {
+socket.on('fin', function(fin) {
 
 
    $.post('/data/chat', {delRoomName: fin.chat,delMemName: fin.name}, function(res) {
 
 
-});	
+　　});	
+  
 
-   
-
- 
- //avatarOther();
- //getList();
-
- 
- 
 });
-
-
 
 
  socket.on('start', function(start) {
 
 
-   //avatarOther();
-//getList();
-
  
 });
-
+//他のアバター表示
 function avatarOther(){
 
+//吹き出し部分リセット
 var hukidasi = document.getElementById('hukidasiList');
-
 hukidasi.innerHTML ='';
 
 
@@ -347,8 +269,7 @@ socket.emit('abc', {
     chatname:chatRoom,
 	avatar:myAvatar
   });
-	
-//getList();
+
 		
 }
 
@@ -364,28 +285,17 @@ socket.emit('abc', {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+//キャンバスのお絵かき部分
 // サーバからメッセージ受信
-    socket.on('send user', function (msg) {
+socket.on('send user', function (msg) {
 	
+	//１人でプレイの時、リターンする
 	if($("#onlypaint").prop('checked')) { 
 	return;
    }else{
    }
 	
-	console.log("asss");
+	//console.log("asss");
         context.strokeStyle = msg.color;
         context.lineWidth = 2;
         context.beginPath();
@@ -401,7 +311,7 @@ socket.emit('abc', {
 	
 
 
-
+//マウスでクリックしたとき
  $('canvas').mousedown(function(e) {
         drawFlag = true;
         fromX = e.pageX - $(this).offset().left - offset;
@@ -409,33 +319,37 @@ socket.emit('abc', {
         return false;  // for chrome
 		
     });
- 
-    $('canvas').mousemove(function(e) {
+ //キャンバス上でマウスでクリックしているとき
+ $('canvas').mousemove(function(e) {
 	
 	
 	var getspuit = $('#spuit').is(':checked');
+	//スポイトツールがオンになっているとき
     if(getspuit == true){
-	 if (drawFlag){
+	if (drawFlag){
+	//キャンバス上での位置取得
 	var spoiX = e.pageX - $('canvas').offset().left - offset;
     var spoiY = e.pageY - $('canvas').offset().top - offset;
+	//その位置の色取得
     spuitImage = context.getImageData(spoiX, spoiY, 1, 1);
     r = spuitImage.data[0];
     g = spuitImage.data[1];
     b = spuitImage.data[2];
 	a = spuitImage.data[3];
+	//アルファ値が０の時、リターン
 	if(a==0){
 	return;
 	}
+	
     spuit_color = 'rgb(' + r +','+ g + ',' + b +')';
+	//(r,g,b)を＃RGBに変換
 	var ret = eval(spuit_color.replace(/rgb/,"((").replace(/,/ig,")*256+")).toString(16); 
 	ret="#" + (("000000" + ret).substring( 6 + ret.length - 6));
+	
 	context.strokeStyle=ret;
-	console.log(ret);
-	console.log(a)
+	
 
-	//$('#nowcolor').css({
-	//	"background-color": ret
-	//	});
+//ｊｓColorの色を変える	
 var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
 myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicker' variable
 
@@ -449,47 +363,42 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
         }
 		}
     });
- 
+ //クリックを離したとき
     $('canvas').on('mouseup', function() {
         drawFlag = false;
 		//スポイト解除
 		var getspuit = $('#spuit').is(':checked');
-    if(getspuit == true){
-	$("input[name=brush]").attr("checked",false); 
-    }
+    　　　if(getspuit == true){
+	　　　$("input[name=brush]").attr("checked",false); 
+    　　　}
 	
     });
- 
-    $('canvas').on('mouseleave', function() {
+ //クリックしている位置がキャンバスから離れた時
+ $('canvas').on('mouseleave', function() {
         drawFlag = false;
 		
 		//スポイト解除
 		var getspuit = $('#spuit').is(':checked');
-    if(getspuit == true){
-	$("input[name=brush]").attr("checked",false); 
-    }
+    　　　if(getspuit == true){
+ 　　　　　$("input[name=brush]").attr("checked",false); 
+    　　　　}
 	
     });
- 
+ //色の部分をクリックしたとき
     $('li').click(function() {
         context.strokeStyle = $(this).css('background-color');
-		//$('#nowcolor').css({
-		//"background-color": context.strokeStyle
-		//});
-		//$("#jscolor").val(context.strokeStyle);
+		
 var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
 myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicker' variable
-//	context.strokeStyle=$("#jscolor").val();
 
 
     });
- 
+ //クリアボタンを押したとき
     $('#clear2').click(function(e) {
-        //socket.emit('clear send',{ chatname:chatRoom });
         e.preventDefault();
         context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
     });
- 
+ //実際に描いていく部分
     function draw(e) {
         var toX = e.pageX - $('canvas').offset().left - offset;
         var toY = e.pageY - $('canvas').offset().top - offset;
@@ -502,24 +411,23 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
 		var iro="#"+$("#jscolor").val();
 		context.strokeStyle =iro;
 		
+		if($("#onlypaint").prop('checked')) { 
+	
+   }else{
+   
         // サーバへメッセージ送信
         socket.emit('server send', { fx:fromX, fy:fromY, tx:toX, ty:toY, color:context.strokeStyle, chatname:chatRoom });
         console.log(iro);
-
+}
 		fromX = toX;
         fromY = toY;
     }
- 
+/* 
     $('#save2').click(function() {
-        //var d = $("canvas")[0].toDataURL("image/png");
-        //d = d.replace("image/png", "image/octet-stream");
-        //window.open(d,"save");
-		//CanvasElement canvas = document.getElementById('#canvasPC');
-        //String dataUrl = canvas.toDataUrl();
 		var can = document.getElementById("#canvasPC");
-Canvas2Image.saveAsPNG(can);    // PNG形式で保存
+　　　　Canvas2Image.saveAsPNG(can);    // PNG形式で保存
     });
-
+*/
 
 socket.on('connect',    function(){
 
@@ -530,26 +438,7 @@ $.post('/data/chat', {newMemRoomName: chatRoom,newMemName: myName}, function(res
 
 
 });	
-//getList();
-//avatarOther();
+
 });
 
 
-$('canvas').mousemove(function(e) {
-    
-});
-
-$('canvas').mouseup(function(e) {
-   
-});
-
-
-$("#spuit").click(function(){
- $('body').css({
-		//"cursor": "url('spoit.cur'), text"
-		});
-		});
-		
-		//$('#send').click(function() 
-		
-	

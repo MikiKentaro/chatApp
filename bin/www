@@ -155,7 +155,6 @@ io.sockets.in(socket.id).emit("rewriteMember", getMember(CHAT,NAME));
 	var socket_id = socket.id;
 	console.log('message : ' + socket_id);
 
-//	io.to(socket_id).emit('event_name',socket_id);
 
 
 
@@ -244,7 +243,6 @@ function getMember(CHAT,NAME) {
 		result += '<div class="avatarOtherOne"><div id="'+userlist[prop].name+'"><div>'+userlist[prop].name+'</div><img src="images/avatar'+userlist[prop].avatar+'.png" alt="ƒTƒ“ƒvƒ‹"></div></div>'
 	}
 	}
-//	console.log("result : " + result);
 	return result;
 };
 

@@ -6,17 +6,21 @@ for(var i=0;i<avatar.length;i++) {
            avatar[0].checked=true;
     }  
 	
+
+	
+if(sessionStorage.length!=0){
+
 var myName=sessionStorage.getItem('myName');
 var chatRoom=sessionStorage.getItem('toChat');	
 var myAvatar=sessionStorage.getItem('myAvatar');
 
-	
-if(myName!=""&&chatRoom!=""&&myAvatar!=""){
+
+
 $.post('/data/prof', {BeChatroom:chatRoom,BeMyname:myName}, function(res) {
 	
        
    });
-var nameform = $('#name');
+var nameform = $('#name_m');
 nameform.val(myName);
 for(var i=0;i<avatar.length;i++) {   
            avatar[myAvatar].checked=true;

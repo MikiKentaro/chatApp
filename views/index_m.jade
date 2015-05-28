@@ -8,10 +8,6 @@ block content
     img(src='images/rogo.png', alt='サンプル')
 
 
-  //label(for='name') 名前
-  //input(type='text',id='name')
-  //button#send2 送信
-  
   div#textform_m
    label(for='text') 内容
    input(type='text',id='text_m',size="50", maxlength="100",placeholder="つぶやきを入力してください")
@@ -37,7 +33,7 @@ block content
   button#camaraSwitch(type='button',style="cursor:pointer;WIDTH: 100px; HEIGHT: 100px") Real World Picker
   
   
-  div#cameraSpace RealWorldPicker;
+  div#cameraSpace(style="display:none") RealWorldPicker;
    div#incameraSpase
     video#myVideo(autoplay='1')
     canvas#c(style="border: 5px solid #ccc;")
@@ -46,7 +42,7 @@ block content
     br
     送信すると、同じ部屋にいる人に送信できます。
     div
-     button#changeButton &#x30AB;&#x30E1;&#x30E9;&#x5207;&#x308A;&#x66FF;&#x3048;
+     button#changeButton カメラ切り替え
      br
      input#chaptya(type='button', value='キャプチャ',style="cursor:pointer;WIDTH: 85px; HEIGHT: 30px")
      &nbsp;&nbsp;
@@ -57,11 +53,6 @@ block content
   
   
   
-  
-  
-  
-  //div#backimage
-  // img(src='images/backimage.png', alt='サンプル',id='ava0' )
 
 
   script(src='javascripts/jquery-2.0.0.min.js')

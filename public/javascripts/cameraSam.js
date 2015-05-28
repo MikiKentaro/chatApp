@@ -236,7 +236,6 @@ var context = cEle.getContext('2d');
 		"background-color": ret
 		});
 
-	//var deb=$('#debug');
 	document.getElementById('debug').innerHTML="spoiX"+spoiX+"spoiY"+spoiY+"ret"+ret+"spuit_color"+spuit_color;
 	
 	

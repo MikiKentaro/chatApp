@@ -82,19 +82,11 @@ app.use('/mypage', mypage);
 app.use('/chat', chat);
 
 
-//var URL;
-//var abc;
-//abc="aabc";
 
 // /todoにGETアクセスしたとき、ToDo一覧を取得するAPI
 app.get('/data/chat', function(req, res) {
   var Chat = mongoose.model('Chat');
   
-  
-  // すべてのToDoを取得して送る
- // Chat.find({}, function(err, chats) {
-//    res.send(chats);
-//  });
 
 
   Chat.find(null,{},{sort:{createdDate: 1}}, function(err, chats){
@@ -106,7 +98,6 @@ app.get('/data/chat', function(req, res) {
   
   var today=new Date();
   today.setDate(today.getDate() - 1);
-  //console.log(today);
   
   
   
@@ -124,10 +115,6 @@ app.get('/data/chatprof', function(req, res) {
 
 	
   });
-
- // Chatprof.find({}, function(err, chatprof) {
- //   res.send(chatprof);
- // });
 });
 
 app.get('/data/prof', function(req, res) {

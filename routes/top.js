@@ -7,7 +7,6 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
 
 
-//exports.index = function(req, res){
 
 userAgent = req.headers['user-agent'].toLowerCase();
 
@@ -17,7 +16,6 @@ userAgent = req.headers['user-agent'].toLowerCase();
     if(userAgent.indexOf("android") != -1
              || userAgent.indexOf("iphone") != -1
              || userAgent.indexOf("ipod") != -1){
-        //res.render('top_m', {title: 'ライドロチャット-モバイル トップページ'});
         res.render('top_m', {title: 'ライドロチャット-モバイル トップページ'});
 
     }
@@ -25,22 +23,8 @@ userAgent = req.headers['user-agent'].toLowerCase();
         res.render('top', {title:'ライドロチャット トップページ'});
     }
 
-//}
 
 
 });
 
-
-
-
-
-
-
-
-/* GET home page. */
-/*
-router.get('/', function(req, res, next) {
-  res.render('top', { title: 'top' });
-});
-*/
 module.exports = router;
