@@ -175,7 +175,7 @@ font-size:15px;
 background-color: #aaffaa;  
 border-radius: 7px;      
 
-
+z-index:50;
 }
 
 #chatTable{
@@ -303,7 +303,7 @@ height:400px;
 }
 
 #canvasPC {
-  z-index=10;
+  z-index:30;
   margin: 0 auto;
 
 position:absolute;
