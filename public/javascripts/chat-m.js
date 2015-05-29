@@ -486,7 +486,7 @@ var aspect=vEle.videoWidth/vEle.videoHeight;
 	
 
     document.getElementById('nowcolor').innerHTML=ret;
-	document.getElementById('debug').innerHTML="spoiX"+spoiX+"spoiY"+spoiY+"ret"+ret+"spuit_color"+spuit_color;
+	//document.getElementById('debug').innerHTML="spoiX"+spoiX+"spoiY"+spoiY+"ret"+ret+"spuit_color"+spuit_color;
 	
 	
     pickerColor=ret;
