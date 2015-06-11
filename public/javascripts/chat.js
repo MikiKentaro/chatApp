@@ -15,7 +15,7 @@ var chatRoom;
 var myID;
 
 
-var offset = 5;
+var offset = 0;
 var fromX;
 var fromY;
 var drawFlag = false;
@@ -279,9 +279,44 @@ socket.emit('abc', {
 
 
 
+socket.on('drowStart', function (drowStart) {
+       console.log("drowStart");
+	   
+//socket.emit('drowStart', { fx:fromX, fy:fromY, chatname:chatRoom,sederName:myName,avatar:myAvatar,color:iro });
+
+	   
+	   
+	    var $DROW = $('#DROW');
+		
+		
+	   $DROW.append('<div id="drowIcon" class="'+drowStart.sederName+'">'+
+	   '<div class="drowIconCircle">●</div>'+
+'<div class="drowIconTri">▼</div>'+
+'<div class="drowIconImg"><img src="images/avaIcon'+drowStart.avatar+'.png" width="132" height="132"  alt=""/></div>'+
+'<div class="drowIconName">'+drowStart.sederName+'</div>'+
+'</div>');
+
+	$('.'+drowStart.sederName).css({
+    
+	'color':drowStart.color
+});
+ $('.drowIconName').css({
+    
+	'color':"#000000"
+}); 
+	   
+    });
 
 
-
+socket.on('drowEnd', function (drowEnd) {
+       console.log("drowEnd");
+	   
+	   var $DROW = $('.'+drowEnd.sederName);
+	   $DROW.html('');
+	   
+	   
+	   
+    });
 
 
 
@@ -302,8 +337,27 @@ socket.on('send user', function (msg) {
         context.moveTo(msg.fx, msg.fy);
         context.lineTo(msg.tx, msg.ty);
         context.stroke();
-        context.closePath(); 
+        context.closePath();
+		
+		
+		var canvasTop= msg.ty-5;
+		var canvasLeft= $('canvas').offset().left+msg.tx-5;
+
+		
+		$('.'+msg.sederName).css({
+     'position':'absolute',
+	'top':canvasTop+'px',
+	'left':canvasLeft+'px'
+});
+	
+	
+	//var avatarOffset=$('#'+abbb).offset();
+　//var leftpos=avatarOffset.left;	
+		 
     });
+ 
+ 
+ 
  
     socket.on('clear user', function () {
         context.clearRect(0, 0, $('canvas').width(), $('canvas').height());
@@ -313,9 +367,14 @@ socket.on('send user', function (msg) {
 
 //マウスでクリックしたとき
  $('canvas').mousedown(function(e) {
+ 
+
         drawFlag = true;
         fromX = e.pageX - $(this).offset().left - offset;
         fromY = e.pageY - $(this).offset().top - offset;
+		var iro="#"+$("#jscolor").val();
+		socket.emit('drowStart', { fx:fromX, fy:fromY, chatname:chatRoom,sederName:myName,avatar:myAvatar,color:iro });
+
         return false;  // for chrome
 		
     });
@@ -371,6 +430,7 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
     　　　if(getspuit == true){
 	　　　$("input[name=brush]").attr("checked",false); 
     　　　}
+		  socket.emit('drowEnd', { chatname:chatRoom,sederName:myName });
 	
     });
  //クリックしている位置がキャンバスから離れた時
@@ -382,6 +442,7 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
     　　　if(getspuit == true){
  　　　　　$("input[name=brush]").attr("checked",false); 
     　　　　}
+			socket.emit('drowEnd', { chatname:chatRoom,sederName:myName });
 	
     });
  //色の部分をクリックしたとき
@@ -416,7 +477,7 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
    }else{
    
         // サーバへメッセージ送信
-        socket.emit('server send', { fx:fromX, fy:fromY, tx:toX, ty:toY, color:context.strokeStyle, chatname:chatRoom });
+        socket.emit('server send', { fx:fromX, fy:fromY, tx:toX, ty:toY, color:context.strokeStyle, chatname:chatRoom,sederName:myName });
         console.log(iro);
 }
 		fromX = toX;

@@ -1,4 +1,4 @@
-body {
+﻿body {
 
   
   padding: 0px 50px;
@@ -348,6 +348,76 @@ height: 50px;
 border: 2px solid #ddd;
 background-color:#000000;
 }
+
+#drowIcon{
+	
+
+	font-size:50px;
+	z-index:50;
+	
+}
+.drowIconCircle{
+	
+	
+	
+	font-size:100px;
+	
+}
+
+.drowIconTri{
+	
+	width:50px;
+	
+	position:relative; 
+	top:-35px; 
+	left:-5px;
+	transform:rotateZ(45deg);
+	font-size:40px;
+	
+}
+.drowIconName{
+	
+	
+	
+	position:relative; 
+	top:-175px; 
+	left:20px;
+	
+	font-size:12px;
+	background-color:#fbb;
+	border-radius: 3px;
+	padding:3px;
+	display:inline-block;
+}
+
+.drowIconImg img{
+	
+	position:relative; 
+	top:-127px; 
+	left:13px;
+	width:75px;
+	height:auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

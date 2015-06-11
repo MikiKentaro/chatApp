@@ -187,9 +187,18 @@ socket.on('realPicker', function (picker) {
         // 自分以外の全員に送る
         socket.broadcast.in(msg.chatname).emit('send user', msg);
     });
-
-
-
+//お絵かき書き始め
+socket.on('drowStart', function (drowStart) {
+ 
+        
+        socket.broadcast.in(drowStart.chatname).emit('drowStart', drowStart);
+    });
+//お絵かき書き終わる
+socket.on('drowEnd', function (drowEnd) {
+ 
+        
+        socket.broadcast.in(drowEnd.chatname).emit('drowEnd', drowEnd);
+    });
 
 
 

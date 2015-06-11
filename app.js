@@ -88,6 +88,16 @@ app.get('/data/chat', function(req, res) {
   var Chat = mongoose.model('Chat');
   
 
+ var today=new Date();
+  today.setDate(today.getDate() - 1);
+  
+  
+  
+   Chat.remove({ createdDate : { $lt :today }} , function(err, prof) {
+  });
+
+
+
 
   Chat.find(null,{},{sort:{createdDate: 1}}, function(err, chats){
 
@@ -96,13 +106,7 @@ app.get('/data/chat', function(req, res) {
 	
   });
   
-  var today=new Date();
-  today.setDate(today.getDate() - 1);
-  
-  
-  
-   Chat.remove({ createdDate : { $lt :today }} , function(err, prof) {
-  });
+ 
   
   
 });
