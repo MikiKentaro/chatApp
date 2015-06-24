@@ -401,6 +401,8 @@ e.preventDefault();
 	//キャンバス上での位置取得
 	var spoiX = e.originalEvent.changedTouches[0].pageX - $('canvas').offset().left - offset;
     var spoiY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
+	
+	console.log('x'+spoiX+'y'+spoiY)
 	//その位置の色取得
     spuitImage = context.getImageData(spoiX, spoiY, 1, 1);
     r = spuitImage.data[0];
