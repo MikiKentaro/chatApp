@@ -374,13 +374,15 @@ if(window.TouchEvent){
 	$('canvas').bind( 'touchstart', function(e){
 	
 	console.log('tStart');
-	e.preventDefault();
+	
 	 drawFlag = true;
         fromX = e.pageX - $(this).offset().left - offset;
         fromY = e.pageY - $(this).offset().top - offset;
 		var iro="#"+$("#jscolor").val();
 		socket.emit('drowStart', { fx:fromX, fy:fromY, chatname:chatRoom,sederName:myName,avatar:myAvatar,color:iro });
 
+
+e.preventDefault();
         return false;  // for chrome
 		
 	
