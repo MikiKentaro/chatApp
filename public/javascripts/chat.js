@@ -365,6 +365,124 @@ socket.on('send user', function (msg) {
 	
 
 
+
+
+
+if(window.TouchEvent){
+
+	
+	$('canvas').bind( 'touchstart', function(e){
+	
+	console.log('tStart');
+	e.preventDefault();
+	 drawFlag = true;
+        fromX = e.pageX - $(this).offset().left - offset;
+        fromY = e.pageY - $(this).offset().top - offset;
+		var iro="#"+$("#jscolor").val();
+		socket.emit('drowStart', { fx:fromX, fy:fromY, chatname:chatRoom,sederName:myName,avatar:myAvatar,color:iro });
+
+        return false;  // for chrome
+		
+	
+	
+	
+	});
+	
+		$('canvas').bind( 'touchmove', function(e){
+		
+		console.log('tMove');
+	
+	var getspuit = $('#spuit').is(':checked');
+	//スポイトツールがオンになっているとき
+    if(getspuit == true){
+	if (drawFlag){
+	//キャンバス上での位置取得
+	var spoiX = e.pageX - $('canvas').offset().left - offset;
+    var spoiY = e.pageY - $('canvas').offset().top - offset;
+	//その位置の色取得
+    spuitImage = context.getImageData(spoiX, spoiY, 1, 1);
+    r = spuitImage.data[0];
+    g = spuitImage.data[1];
+    b = spuitImage.data[2];
+	a = spuitImage.data[3];
+	//アルファ値が０の時、リターン
+	if(a==0){
+	return;
+	}
+	
+    spuit_color = 'rgb(' + r +','+ g + ',' + b +')';
+	//(r,g,b)を＃RGBに変換
+	var ret = eval(spuit_color.replace(/rgb/,"((").replace(/,/ig,")*256+")).toString(16); 
+	ret="#" + (("000000" + ret).substring( 6 + ret.length - 6));
+	
+	context.strokeStyle=ret;
+	
+
+//ｊｓColorの色を変える	
+var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
+myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicker' variable
+
+	
+	}else{}
+	
+    }else{
+	
+        if (drawFlag) {
+            draw(e);
+        }
+		}
+
+
+});
+
+		$('canvas').bind( 'touchend', function(e){
+		
+		console.log('tend');
+		        drawFlag = false;
+		//スポイト解除
+		var getspuit = $('#spuit').is(':checked');
+    　　　if(getspuit == true){
+	　　　$("input[name=brush]").attr("checked",false); 
+    　　　}
+		  socket.emit('drowEnd', { chatname:chatRoom,sederName:myName });
+
+		
+		
+		
+		});
+			$('canvas').bind( 'touchleave', function(e){
+		
+		        drawFlag = false;
+		//スポイト解除
+		var getspuit = $('#spuit').is(':checked');
+    　　　if(getspuit == true){
+	　　　$("input[name=brush]").attr("checked",false); 
+    　　　}
+		  socket.emit('drowEnd', { chatname:chatRoom,sederName:myName });
+
+		
+		
+		
+		});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //マウスでクリックしたとき
  $('canvas').mousedown(function(e) {
  
@@ -506,107 +624,3 @@ $.post('/data/chat', {newMemRoomName: chatRoom,newMemName: myName}, function(res
 
 });
 
-
-//if(window.TouchEvent){
-
-	
-	$('canvas').bind( 'touchstart', function(e){
-	
-	console.log('tStart');
-	e.preventDefault();
-	 drawFlag = true;
-        fromX = e.pageX - $(this).offset().left - offset;
-        fromY = e.pageY - $(this).offset().top - offset;
-		var iro="#"+$("#jscolor").val();
-		socket.emit('drowStart', { fx:fromX, fy:fromY, chatname:chatRoom,sederName:myName,avatar:myAvatar,color:iro });
-
-        return false;  // for chrome
-		
-	
-	
-	
-	});
-	
-		$('canvas').bind( 'touchmove', function(e){
-		
-		console.log('tMove');
-	
-	var getspuit = $('#spuit').is(':checked');
-	//スポイトツールがオンになっているとき
-    if(getspuit == true){
-	if (drawFlag){
-	//キャンバス上での位置取得
-	var spoiX = e.pageX - $('canvas').offset().left - offset;
-    var spoiY = e.pageY - $('canvas').offset().top - offset;
-	//その位置の色取得
-    spuitImage = context.getImageData(spoiX, spoiY, 1, 1);
-    r = spuitImage.data[0];
-    g = spuitImage.data[1];
-    b = spuitImage.data[2];
-	a = spuitImage.data[3];
-	//アルファ値が０の時、リターン
-	if(a==0){
-	return;
-	}
-	
-    spuit_color = 'rgb(' + r +','+ g + ',' + b +')';
-	//(r,g,b)を＃RGBに変換
-	var ret = eval(spuit_color.replace(/rgb/,"((").replace(/,/ig,")*256+")).toString(16); 
-	ret="#" + (("000000" + ret).substring( 6 + ret.length - 6));
-	
-	context.strokeStyle=ret;
-	
-
-//ｊｓColorの色を変える	
-var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
-myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicker' variable
-
-	
-	}else{}
-	
-    }else{
-	
-        if (drawFlag) {
-            draw(e);
-        }
-		}
-
-
-});
-
-		$('canvas').bind( 'touchend', function(e){
-		
-		console.log('tend');
-		        drawFlag = false;
-		//スポイト解除
-		var getspuit = $('#spuit').is(':checked');
-    　　　if(getspuit == true){
-	　　　$("input[name=brush]").attr("checked",false); 
-    　　　}
-		  socket.emit('drowEnd', { chatname:chatRoom,sederName:myName });
-
-		
-		
-		
-		});
-			$('canvas').bind( 'touchleave', function(e){
-		
-		        drawFlag = false;
-		//スポイト解除
-		var getspuit = $('#spuit').is(':checked');
-    　　　if(getspuit == true){
-	　　　$("input[name=brush]").attr("checked",false); 
-    　　　}
-		  socket.emit('drowEnd', { chatname:chatRoom,sederName:myName });
-
-		
-		
-		
-		});
-
-
-
-
-
-
-//}
