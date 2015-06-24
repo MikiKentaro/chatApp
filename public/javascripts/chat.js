@@ -392,7 +392,7 @@ e.preventDefault();
 	
 		$('canvas').bind( 'touchmove', function(e){
 		
-		console.log('tMove');
+		//console.log('tMove');
 	
 	var getspuit = $('#spuit').is(':checked');
 	//スポイトツールがオンになっているとき
@@ -402,7 +402,7 @@ e.preventDefault();
 	var spoiX = e.originalEvent.changedTouches[0].pageX - $('canvas').offset().left - offset;
     var spoiY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
 	
-	console.log('x'+spoiX+'y'+spoiY)
+	console.log('x'+spoiX+'y'+spoiY);
 	//その位置の色取得
     spuitImage = context.getImageData(spoiX, spoiY, 1, 1);
     r = spuitImage.data[0];
