@@ -376,8 +376,8 @@ if(window.TouchEvent){
 	console.log('tStart');
 	
 	 drawFlag = true;
-        fromX = e.pageX - $(this).offset().left - offset;
-        fromY = e.pageY - $(this).offset().top - offset;
+        fromX = e.originalEvent.changedTouches[0].pageX - $(this).offset().left - offset;
+        fromY = e.originalEvent.changedTouches[0].pageY - $(this).offset().top - offset;
 		var iro="#"+$("#jscolor").val();
 		socket.emit('drowStart', { fx:fromX, fy:fromY, chatname:chatRoom,sederName:myName,avatar:myAvatar,color:iro });
 
