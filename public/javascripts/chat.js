@@ -507,7 +507,7 @@ $.post('/data/chat', {newMemRoomName: chatRoom,newMemName: myName}, function(res
 });
 
 
-if(window.TouchEvent){
+//if(window.TouchEvent){
 
 	
 	$('canvas').bind( 'touchstart', function(e){
@@ -605,4 +605,4 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
 
 
 
-}
+//}
