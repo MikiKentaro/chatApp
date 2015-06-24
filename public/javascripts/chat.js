@@ -512,6 +512,7 @@ $.post('/data/chat', {newMemRoomName: chatRoom,newMemName: myName}, function(res
 	
 	$('canvas').bind( 'touchstart', function(e){
 	
+	console.log('tStart');
 	e.preventDefault();
 	 drawFlag = true;
         fromX = e.pageX - $(this).offset().left - offset;
@@ -527,6 +528,8 @@ $.post('/data/chat', {newMemRoomName: chatRoom,newMemName: myName}, function(res
 	});
 	
 		$('canvas').bind( 'touchmove', function(e){
+		
+		console.log('tMove');
 	
 	var getspuit = $('#spuit').is(':checked');
 	//スポイトツールがオンになっているとき
@@ -573,6 +576,7 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
 
 		$('canvas').bind( 'touchend', function(e){
 		
+		console.log('tend');
 		        drawFlag = false;
 		//スポイト解除
 		var getspuit = $('#spuit').is(':checked');
