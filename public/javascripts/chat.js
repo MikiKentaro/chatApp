@@ -432,7 +432,7 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
     }else{
 	
         if (drawFlag) {
-            draw(e);
+            drawT(e);
         }
 		}
 
@@ -472,6 +472,35 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
 
 
 }
+    function drawT(e) {
+        var toX = e.originalEvent.changedTouches[0].pageX - $('canvas').offset().left - offset;
+        var toY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
+        context.lineWidth = 2;
+        context.beginPath();
+        context.moveTo(fromX, fromY);
+        context.lineTo(toX, toY);
+        context.stroke();
+        context.closePath();
+		var iro="#"+$("#jscolor").val();
+		context.strokeStyle =iro;
+		
+		if($("#onlypaint").prop('checked')) { 
+	
+   }else{
+   
+        // サーバへメッセージ送信
+        socket.emit('server send', { fx:fromX, fy:fromY, tx:toX, ty:toY, color:context.strokeStyle, chatname:chatRoom,sederName:myName });
+        console.log(iro);
+}
+		fromX = toX;
+        fromY = toY;
+    }
+
+
+
+
+
+//タッチ用　閉じる
 
 
 
