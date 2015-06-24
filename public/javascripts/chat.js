@@ -378,6 +378,14 @@ socket.on('send user', function (msg) {
         return false;  // for chrome
 		
     });
+	
+	
+	$('canvas').bind( 'touchmove', function(e){
+	
+	
+	
+	e.preventDefault();
+	});
  //キャンバス上でマウスでクリックしているとき
  $('canvas').mousemove(function(e) {
 	
