@@ -399,8 +399,8 @@ e.preventDefault();
     if(getspuit == true){
 	if (drawFlag){
 	//キャンバス上での位置取得
-	var spoiX = e.pageX - $('canvas').offset().left - offset;
-    var spoiY = e.pageY - $('canvas').offset().top - offset;
+	var spoiX = e.originalEvent.changedTouches[0].pageX - $('canvas').offset().left - offset;
+    var spoiY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
 	//その位置の色取得
     spuitImage = context.getImageData(spoiX, spoiY, 1, 1);
     r = spuitImage.data[0];
