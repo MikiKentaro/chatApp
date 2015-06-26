@@ -20,10 +20,18 @@ var fromX;
 var fromY;
 var drawFlag = false;
 var context = $("canvas").get(0).getContext('2d');
+var brushSize=5;
 
-
+var kesigomuOn=false;
 
 var socket = io();
+
+function changeValue(value) {
+　document.getElementById("brushSize").innerHTML = "ブラシサイズ　"+value;
+  brushSize=value;
+}
+
+
 
 //チャット内の人数が変わった時　アバターの表示部分
 socket.on("rewriteMember", function (allMemberName) {
@@ -42,6 +50,7 @@ socket.on("sendPicker", function (picker) {
   //ポップアップのOKを押したとき
 　$('#popupOKbutton').click(function() {
   　var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
+	kesigomuOn=false;
     myPicker.fromString(picker.color);  // now you can access API via 'myPicker' variable
 	$("#popupColor").hide();
 });
@@ -85,7 +94,7 @@ socket.on('chat', function(chat) {
   
 　var EStext =escapeHTML(chat.message);
   var hukidasi = document.getElementById('hukidasiList');
-  var newChat = '<div class="hukiMesse" style="position:relative; left: '+leftpos+'px;">' + EStext + '</div>';
+  var newChat = '<div class="hukiMesse" style="position:relative; left: '+leftpos+'px; ">' + EStext + '</div>';
   var oldChat = hukidasi.innerHTML;
   hukidasi.innerHTML = oldChat +newChat;
   
@@ -101,6 +110,22 @@ $('#send').click(function() {
     sendMessage();
 	postList();
 	
+});
+
+$('#resetFuki').click(function() {
+   var hukidasi = document.getElementById('hukidasiList');
+   hukidasi.innerHTML ='';
+   
+   
+});
+
+$('#jscolor').click(function() {
+  kesigomuOn=false;
+  
+});
+$('#erase').click(function() {
+  kesigomuOn=true;
+  
 });
 
 
@@ -216,7 +241,7 @@ function firstView(){
 　chatRoom=sessionStorage.getItem('toChat');
 //自分のアバター表示
 　var $avatarMe = $('#chatAvatarMe');
-　document.getElementById("chatAvatarMe").innerHTML = '<div id="'+myName+'"><div>'+myName+'</div><img src="images/avatar'+myAvatar+'.png" alt="サンプル"></div>';	
+　document.getElementById("chatAvatarMe").innerHTML = '<div id="'+myName+'"><img src="images/avatar'+myAvatar+'.png" alt="サンプル"><div>'+myName+'</div></div>';	
 
 //チャット名表示
 var ESchatRoom =escapeHTML(chatRoom);
@@ -332,10 +357,17 @@ socket.on('send user', function (msg) {
 	
 	//console.log("asss");
         context.strokeStyle = msg.color;
-        context.lineWidth = 2;
+        context.lineWidth = msg.brushS;
         context.beginPath();
         context.moveTo(msg.fx, msg.fy);
         context.lineTo(msg.tx, msg.ty);
+		context.lineJoin= 'round';
+		context.lineCap = 'round';
+		if(msg.kesigomu==true) { 
+		context.globalCompositeOperation = 'destination-out';
+		}else{
+		context.globalCompositeOperation = 'source-over';
+		}
         context.stroke();
         context.closePath();
 		
@@ -418,7 +450,7 @@ e.preventDefault();
 	//(r,g,b)を＃RGBに変換
 	var ret = eval(spuit_color.replace(/rgb/,"((").replace(/,/ig,")*256+")).toString(16); 
 	ret="#" + (("000000" + ret).substring( 6 + ret.length - 6));
-	
+	kesigomuOn=false;
 	context.strokeStyle=ret;
 	
 
@@ -475,10 +507,17 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
     function drawT(e) {
         var toX = e.originalEvent.changedTouches[0].pageX - $('canvas').offset().left - offset;
         var toY = e.originalEvent.changedTouches[0].pageY - $('canvas').offset().top - offset;
-        context.lineWidth = 2;
+        context.lineWidth = brushSize;
         context.beginPath();
         context.moveTo(fromX, fromY);
         context.lineTo(toX, toY);
+		context.lineJoin= 'round';
+		context.lineCap = 'round';
+		if(kesigomuOn==true) { 
+		context.globalCompositeOperation = 'destination-out';
+		}else{
+		context.globalCompositeOperation = 'source-over';
+		}
         context.stroke();
         context.closePath();
 		var iro="#"+$("#jscolor").val();
@@ -489,7 +528,7 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
    }else{
    
         // サーバへメッセージ送信
-        socket.emit('server send', { fx:fromX, fy:fromY, tx:toX, ty:toY, color:context.strokeStyle, chatname:chatRoom,sederName:myName });
+        socket.emit('server send', { fx:fromX, fy:fromY, tx:toX, ty:toY, color:context.strokeStyle, chatname:chatRoom,sederName:myName,brushS:brushSize,kesigomu:kesigomuOn });
         console.log(iro);
 }
 		fromX = toX;
@@ -559,7 +598,7 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
 	//(r,g,b)を＃RGBに変換
 	var ret = eval(spuit_color.replace(/rgb/,"((").replace(/,/ig,")*256+")).toString(16); 
 	ret="#" + (("000000" + ret).substring( 6 + ret.length - 6));
-	
+	kesigomuOn=false;
 	context.strokeStyle=ret;
 	
 
@@ -606,7 +645,7 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
 		
 var myPicker = new jscolor.color(document.getElementById('jscolor'), {})
 myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicker' variable
-
+kesigomuOn=false;
 
     });
  //クリアボタンを押したとき
@@ -618,10 +657,17 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
     function draw(e) {
         var toX = e.pageX - $('canvas').offset().left - offset;
         var toY = e.pageY - $('canvas').offset().top - offset;
-        context.lineWidth = 2;
+        context.lineWidth = brushSize;
         context.beginPath();
         context.moveTo(fromX, fromY);
         context.lineTo(toX, toY);
+		context.lineJoin= 'round';
+		context.lineCap = 'round';
+		if(kesigomuOn==true) { 
+		context.globalCompositeOperation = 'destination-out';
+		}else{
+		context.globalCompositeOperation = 'source-over';
+		}
         context.stroke();
         context.closePath();
 		var iro="#"+$("#jscolor").val();
@@ -632,7 +678,7 @@ myPicker.fromString(context.strokeStyle)  // now you can access API via 'myPicke
    }else{
    
         // サーバへメッセージ送信
-        socket.emit('server send', { fx:fromX, fy:fromY, tx:toX, ty:toY, color:context.strokeStyle, chatname:chatRoom,sederName:myName });
+        socket.emit('server send', { fx:fromX, fy:fromY, tx:toX, ty:toY, color:context.strokeStyle, chatname:chatRoom,sederName:myName,brushS:brushSize,kesigomu:kesigomuOn });
         console.log(iro);
 }
 		fromX = toX;

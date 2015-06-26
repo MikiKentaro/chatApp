@@ -7,6 +7,7 @@
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
    background-color:#6495ED;
    background-color:#ffffff;
+   
 
 }
 
@@ -95,32 +96,31 @@ font-size:20px;
 
 }
 #chatAvatar{
-z-index:5;
+z-index:-5;
 font-size: 20px;
 
 }
 
 #chatAvatarMe{
 position:absolute;
-bottom:30px;
+bottom:40px;
 left:30px;
 }
 
 #chatAvatarMe img{
-width:100px;
-
-
+width:80px;
+z-index:-5;
 }
 
 #chatAvatarOther{
 position:absolute;
-bottom:30px;
+bottom:40px;
 left:140px;
 }
 
 #chatAvatarOther img{
 width:80px;
-
+z-index:-5;
 }
 
 .roomname{
@@ -272,7 +272,14 @@ color:#990000;
 
 }
 
-
+#resetFuki {
+    font-size: 12px;
+    width: 90px;
+    height: 30px;
+	position:absolute;
+    bottom:10px;
+    left:120px;
+}
 
 
 
@@ -322,8 +329,22 @@ position:absolute;
 }
 #clear2 {
     font-size: 120%;
-    width: 90px;
-    height: 45px;
+    width: 94px;
+    height: 47px;
+}
+#erase {
+    font-size: 10px;
+    width: 47px;
+    height: 47px;
+}
+#spuit{
+position:relative;
+z-index:10;
+}
+#onlypaint{
+position:relative;
+z-index:10;
+
 }
 ul{
 position:relative;
@@ -341,6 +362,10 @@ li {
     height: 45px;
 }
 
+#brushSize{
+z-index:0;
+
+}
 #nowcolor{
 
 width: 100px;

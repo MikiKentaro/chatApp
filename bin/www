@@ -249,7 +249,7 @@ function getMember(CHAT,NAME) {
 	
 	if(userlist[prop].chat==CHAT&&userlist[prop].name!=NAME){
 		// 最後に", "がつくけど無視
-		result += '<div class="avatarOtherOne"><div id="'+userlist[prop].name+'"><div>'+userlist[prop].name+'</div><img src="images/avatar'+userlist[prop].avatar+'.png" alt="サンプル"></div></div>'
+		result += '<div class="avatarOtherOne"><div id="'+userlist[prop].name+'"><img src="images/avatar'+userlist[prop].avatar+'.png" alt="サンプル"><div>'+userlist[prop].name+'</div></div></div>'
 	}
 	}
 	return result;

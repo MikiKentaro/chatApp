@@ -25,8 +25,13 @@ block content
   div#chatAvatar
    div#chatAvatarMe
    div#chatAvatarOther
+  
+  div#resetHukidasi
+   input#resetFuki(type='button', value='吹き出しリセット',style="cursor:pointer;")
+
 
   div#chatName
+  
   
   
 
@@ -37,7 +42,7 @@ block content
   div#canvasbodar
   canvas#canvasPC(width='500', height='400')
   
-  div(style='font-size:20px;') カラー
+  div(style='font-size:10px;') カラー
   <input class="color" id="jscolor" value="#000000" style='width:140px'>
 
   ul
@@ -50,9 +55,15 @@ block content
    li(style='background-color:#ff0')
    li(style='background-color:#f0f')
    li(style='background-color:#0ff')
+  
   #button2
    //input#save2(type='button', value='保存',style="cursor:pointer;")
    input#clear2(type='button', value='クリア',style="cursor:pointer;")
+   input#erase(type='button', value='消しゴム',style="cursor:pointer;")
+
+  div
+   div#brushSize ブラシサイズ　5
+   input(type='range', name='num', min='0', max='50', step='1', value='5', onchange='changeValue(this.value)')
 
   div スポイト
    input#spuit(type='radio', name='brush',style="cursor:pointer;")
@@ -74,6 +85,7 @@ block content
 
 
   script(src='javascripts/jquery-2.0.0.min.js')
+
   script(src='/socket.io/socket.io.js')
   script(src='javascripts/chat.js')
   script(src='javascripts/jscolor.js')
